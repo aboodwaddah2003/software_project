@@ -13,11 +13,11 @@ Feature: User tries to log in to the system
       | abood   | 1234  |
 
 
-    Scenario Outline: The user enters invalid password
-      Given when the user in the login page
-      When  the user enters  invalid password {string}
+    Scenario Outline: The user enters invalid username
+      Given the user is on the login page
+      When  the user enters  invalid username "<username1>"
       And   press the login button
-      Then  the login attempt fails with an error pass message
+      Then  the login attempt fails with an error username message
       Examples:
-        | username | password |
-        | osama    | 1010  |
+        | username1 |
+        | osama1   |

@@ -8,7 +8,7 @@ public class loginHelper
     public String getMessage() {
         return message;
     }
-  public  boolean  UserPassTrue(String userName,String password)
+  public  boolean  UserPass(String userName,String password)
   {
     if(Userlist.search(userName)!=-1)
     {
@@ -25,5 +25,20 @@ public class loginHelper
     }
 return login;
   }
+
+
+ /* public boolean isUserInValid(String userName)
+  {
+    if(Userlist.search(userName)==-1 )
+    login=false;
+
+    else
+        login=true;
+
+
+
+    return login;
+
+  }*/
 
 }
