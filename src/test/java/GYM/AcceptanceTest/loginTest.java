@@ -45,7 +45,7 @@ public class loginTest {
         }
         else
             Assertions.fail("dvdvdv");
-      System.out.println(login.getMessage());
+        System.out.println(login.getMessage());
     }
 
 /////////////////////////s2
@@ -60,7 +60,7 @@ public class loginTest {
 
     @When("the user enters  invalid username {string}")
     public void the_user_enters_invalid_username(String string) {
-       state=login.UserPass(string,"any thing");
+        state=login.UserPass(string,"any thing");
     }
     @When("press the login button")
     public void press_the_login_button() {
@@ -73,11 +73,45 @@ public class loginTest {
     }
     @Then("the login attempt fails with an error username message")
     public void the_login_attempt_fails_with_an_error_username_message() {
-        System.out.println(login.getMessage());
+        System.out.println("invalid username");
+    }
+
+    @When("the user enters an invalid password {string}")
+    public void the_user_enters_an_invalid_password(String string) {
+      state=login.UserPass("osama","1212");
+    }
+    @When("clicks the login button3")
+    public void clicks_the_login_button3() {
+        if (!state)
+        {
+            Assertions.assertTrue(true);
+        }
+        else
+            Assertions.fail("dvdvdv");
+
+    }
+    @Then("the login attempt fails with an error pass message")
+    public void the_login_attempt_fails_with_an_error_pass_message() {
+        System.out.println("invalid password");
+    }
+
+    @When("the user leaves the username field empty and enters a password \"password1\"or empty pass with valid username\"osama\"")
+    public void the_user_leaves_the_username_field_empty_and_enters_a_password_password1_or_empty_pass_with_valid_username_osama() {
+state=login.allFieldsAreFilled("abood","");
+    }
+    @When("clicks the login button4")
+    public void clicks_the_login_button4() {
+        if(state){
+            Assertions.fail("the pass or username are empty..!");
+        }
+        else {
+            Assertions.assertFalse(state);
+        }
+    }
+    @Then("the login attempt fails with an error message for missing username")
+    public void the_login_attempt_fails_with_an_error_message_for_missing_username() {
+        System.out.println("the username or password is missing");
     }
 
 
 }
-
-
-

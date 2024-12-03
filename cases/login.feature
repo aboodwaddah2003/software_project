@@ -21,3 +21,16 @@ Feature: User tries to log in to the system
       Examples:
         | username1 |
         | osama1   |
+
+  Scenario: User login with invalid password
+    Given the user is on the login page
+    When the user enters an invalid password "<password>"
+    And clicks the login button3
+    Then the login attempt fails with an error pass message
+
+
+  Scenario: User login with missing username or password
+    Given the user is on the login page
+    When the user leaves the username field empty and enters a password "password1"or empty pass with valid username"osama"
+    And clicks the login button4
+    Then the login attempt fails with an error message for missing username
