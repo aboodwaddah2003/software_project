@@ -6,11 +6,20 @@ public class User {
     private int id;
     private String email;
     private String password;
+
+
+
+    private boolean isActive;
+
     private String type;
 
 
 
-    public User(String userName, String email, String password,String type)
+    private String status;
+
+    private  String subscriptionPlans;
+
+    public User(String userName, String email, String password, String type,String subscriptionPlans)
     {
         this.email=email;
         this.userName=userName;
@@ -18,6 +27,9 @@ public class User {
         this.type=type;
         count++;
         this.id=count;
+        this.subscriptionPlans=subscriptionPlans;
+        this.isActive=true;
+        this.status="pending";
     }
 
 
@@ -57,4 +69,32 @@ public class User {
         this.userName = userName;
     }
 
+    public String getSubscriptionPlans() {
+        return subscriptionPlans;
+    }
+
+    public void setSubscriptionPlans(String subscriptionPlans) {
+        this.subscriptionPlans = subscriptionPlans;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public boolean isActive() {
+        return isActive;
+    }
+
+    public void setActive(boolean active) {
+        isActive = active;
+    }
+
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
 }
