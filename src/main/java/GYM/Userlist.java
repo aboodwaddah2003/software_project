@@ -122,18 +122,6 @@ public class Userlist {
 
 
 
-    public boolean deleteUser(String username) {
-        int index = search(username);
-        if (index != -1) {
-            users.remove(index);
-            return true;
-        }
-        return false;
-    }
-
-
-
-
     public boolean IsCanBeUser(String username, String password, String email, String subscriptionPlan) {
 
         if (!allFieldsisIsFull(username, password, email, subscriptionPlan)) {
@@ -163,17 +151,6 @@ public class Userlist {
 
         return true;
     }
-
-
-    private boolean isValidPhoneNumber(String phone) {
-
-        if (phone != null && phone.matches("\\d{10}") && phone.startsWith("059")) {
-            return true;
-        }
-        System.out.println("Invalid phone number format.");
-        return false;
-    }
-
 
 
 
