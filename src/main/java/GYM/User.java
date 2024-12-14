@@ -6,7 +6,7 @@ public class User {
     private int id;
     private String email;
     private String password;
-
+    private String subscriptionPlan;
 
 
     private boolean isActive;
@@ -97,4 +97,13 @@ public class User {
     public void setStatus(String status) {
         this.status = status;
     }
+
+    public void setSubscriptionPlan(String newSubscription) {
+        if (Userlist.IsValidSubscriptionPlan(newSubscription)) {
+            this.subscriptionPlan = newSubscription;
+        } else {
+            throw new IllegalArgumentException("Invalid subscription plan: " + newSubscription);
+        }
+    }
+
 }

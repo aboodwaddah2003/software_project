@@ -1,46 +1,35 @@
 package GYM;
+
 import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Userlist {
+    public static ArrayList<User> users = new ArrayList<>();
+
     public static void fillData() {
-        User u = new User("osama", "osama@gmail.com", "1234", "Admin"," " );
-        User u1 = new User("abood", "abood@gmail.com", "1234", "Client","Basic");
-        User u2 = new User("bayan", "bayan@gmail.com", "1234", "Instructor","Prime");
-        User u3 = new User("waddah", "waddah@gmail.com", "1234", "Instructor","Prime");
-        Client c1=new Client("ammar","ammar@gmail.com","1234","Client","Basic");
-        Instructor n1=new Instructor("mahmoud","moh@gmail.com","10203040","Instructor","Gold");
-        Instructor n2=new Instructor("alaa22", "alaa22@gmail.com", "1234", "Instructor", "Silver");
+        User u = new User("osama", "osama@gmail.com", "1234", "Admin", " ");
+        User u1 = new User("abood", "abood@gmail.com", "1234", "Client", "Basic");
+        User u2 = new User("bayan", "bayan@gmail.com", "1234", "Instructor", "Prime");
+        User u3 = new User("waddah", "waddah@gmail.com", "1234", "Instructor", "Prime");
+        Client c1 = new Client("ammar", "ammar@gmail.com", "1234", "Client", "Basic");
+        Instructor n1 = new Instructor("mahmoud", "moh@gmail.com", "10203040", "Instructor", "Gold");
+        Instructor n2 = new Instructor("alaa22", "alaa22@gmail.com", "1234", "Instructor", "Silver");
 
-        if(search(u.getUserName())==-1)
-
-            Userlist.users.add(u);
-
-        if(search(u1.getUserName())==-1)
-
-            Userlist.users.add(u1);
-
-        if(search(u2.getUserName())==-1)
-
-            Userlist.users.add(u2);
-
-        if(search(u3.getUserName())==-1)
-
-            Userlist.users.add(u3);
-
-        if(search(c1.getUserName())==-1)
-            Userlist.users.add(c1);
-
-        if(search(n1.getUserName())==-1)
-            Userlist.users.add(n1);
-
-        if(search(n2.getUserName())==-1)
-            Userlist.users.add(n2);
+        addUserIfNotExists(u);
+        addUserIfNotExists(u1);
+        addUserIfNotExists(u2);
+        addUserIfNotExists(u3);
+        addUserIfNotExists(c1);
+        addUserIfNotExists(n1);
+        addUserIfNotExists(n2);
     }
 
-
-    public static ArrayList<User> users = new ArrayList<User>();
+    private static void addUserIfNotExists(User user) {
+        if (search(user.getUserName()) == -1) {
+            users.add(user);
+        }
+    }
 
     public static int search(String username) {
         for (int i = 0; i < users.size(); i++) {
@@ -48,7 +37,6 @@ public class Userlist {
             if (user != null && username.equals(user.getUserName())) {
                 return i;
             }
-
         }
         return -1;
     }
@@ -59,83 +47,174 @@ public class Userlist {
             if (user != null && email.equals(user.getEmail())) {
                 return i;
             }
-
         }
         return -1;
     }
 
-    public boolean IsCanBeUser(String user,String pass,String email,String role,String sub)
-    {
-    if(search(user)==-1)
-    {
-        if(IsValidUsername(user) &&IsValidPass(pass)&&IsValidEmail(email)&&IsValidRole(role))
-        {
-            User u=new User(user,pass,email,role,sub);
-            users.add(u);
-            return true;
+    public boolean createClient(String username, String password, String email, String role, String subscription, int age, String goals, String dietaryPreferences) {
+        if (search(username) == -1 && searchEmail(email) == -1) {
+            if (IsValidUsername(username) && IsValidPass(password) && IsValidEmail(email) && IsValidRole(role) && IsValidSubscriptionPlan(subscription)) {
+                Client newClient = new Client(username, email, password, role, subscription);
+                users.add(newClient);
+                return true;
+            }
         }
-    }
-    return  false;
-
-    }
-
-    public boolean IsValidUsername(String user) {
-
-
-
-
-        if (user.length() >= 5 && user.length() <= 15 && Character.isLetter(user.charAt(0))) {
-            return true;
-        }
-
         return false;
     }
 
-
-    public static boolean IsValidPass(String pass)
-    {
-
-        if(pass.length()>=8 && pass.length()<=18)
-            return true;
-
-            return false;
+    public boolean updateClientDetails(String username, String newEmail, String newPassword, String newSubscription) {
+        int index = search(username);
+        if (index != -1) {
+            User user = users.get(index);
+            if (user instanceof Client) {
+                Client client = (Client) user;
+                if (newEmail != null && IsValidEmail(newEmail)) {
+                    client.setEmail(newEmail);
+                }
+                if (newPassword != null && IsValidPass(newPassword)) {
+                    client.setPassword(newPassword);
+                }
+                if (newSubscription != null && IsValidSubscriptionPlan(newSubscription)) {
+                    client.setSubscriptionPlan(newSubscription);
+                }
+                return true;
+            }
+        }
+        return false;
     }
 
-    public static boolean IsValidEmail(String email)
-    {
+    public boolean updateDietaryPreferences(String username, String newPreferences) {
+        int index = search(username);
+        if (index != -1) {
+            User user = users.get(index);
+            if (user instanceof Client) {
+                Client client = (Client) user;
+                client.setDietaryPreferences(newPreferences);
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public boolean IsValidUsername(String user) {
+        return user.length() >= 5 && user.length() <= 15 && Character.isLetter(user.charAt(0));
+    }
+
+    public static boolean IsValidPass(String pass) {
+        return pass.length() >= 8 && pass.length() <= 18;
+    }
+
+    public static boolean IsValidEmail(String email) {
         String emailRegex = "^[a-zA-Z0-9_+&*-]+(?:\\.[a-zA-Z0-9_+&*-]+)*@" + "(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,7}$";
         Pattern pattern = Pattern.compile(emailRegex);
         Matcher matcher = pattern.matcher(email);
         return matcher.matches();
     }
 
-    public static  boolean  IsValidRole(String role)
-    {
-        if(role.equals("Admin")  || role.equals("Client") || role.equals("Instructor "))
+    public static boolean IsValidRole(String role) {
+        return role.equals("Admin") || role.equals("Client") || role.equals("Instructor");
+    }
+
+    public static boolean IsValidSubscriptionPlan(String sub) {
+        return sub.equals("Basic") || sub.equals("Premium") || sub.equals("Gold") || sub.equals("Silver") || sub.equals("Prime");
+    }
+
+    public boolean areAllFieldsFilled(String... fields) {
+        for (String field : fields) {
+            if (field == null || field.isEmpty()) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public boolean deleteUser(String username) {
+        int index = search(username);
+        if (index != -1) {
+            users.remove(index);
             return true;
-
-
+        }
         return false;
     }
 
-    public static boolean IsValidSubscriptionPlan(String sub)
-    {
-        if(sub.equals("Basic")  || sub.equals("Premium") || sub.equals("Gold ") || sub.equals("Silver"))
+    public boolean allFieldsisFull(String userName, String password, String email, String role) {
+        if (!userName.isEmpty() && !password.isEmpty() && !email.isEmpty() && !role.isEmpty()) {
             return true;
-
+        }
         return false;
     }
 
-    public boolean allFieldsisIsFull(String s1,String s2,String s3,String s4)
-    {
-        return !s1.isEmpty() && !s2.isEmpty() &&!s3.isEmpty()&&!s4.isEmpty();
+
+    public boolean IsCanBeUser(String username, String password, String email, String phone, String subscriptionPlan) {
+
+        if (!areAllFieldsFilled(username, password, email, phone, subscriptionPlan)) {
+            return false;
+        }
+
+
+        if (search(username) != -1) {
+            System.out.println("Username already exists.");
+            return false; // إذا كان اسم المستخدم مكرر
+        }
+
+
+        if (!IsValidEmail(email)) {
+            System.out.println("Invalid email format.");
+            return false;
+        }
+
+
+        if (!isValidPhoneNumber(phone)) {
+            return false;
+        }
+
+
+        if (!isValidSubscriptionPlan(subscriptionPlan)) {
+            System.out.println("Invalid subscription plan.");
+            return false;
+        }
+
+        return true;
+    }
+
+
+    private boolean isValidPhoneNumber(String phone) {
+
+        if (phone != null && phone.matches("\\d{10}") && phone.startsWith("059")) {
+            return true;
+        }
+        System.out.println("Invalid phone number format.");
+        return false;
     }
 
 
 
+
+    private boolean isValidSubscriptionPlan(String subscriptionPlan) {
+        return subscriptionPlan != null && (subscriptionPlan.equals("Basic") || subscriptionPlan.equals("Premium")); // تحقق من أن الخطة إما Basic أو Premium
+    }
+
+    public boolean allFieldsisIsFull(String field1, String field2, String field3, String field4) {
+
+        if (field1 == null || field1.isEmpty()) {
+            System.out.println("Field 1 is required.");
+            return false;
+        }
+        if (field2 == null || field2.isEmpty()) {
+            System.out.println("Field 2 is required.");
+            return false;
+        }
+        if (field3 == null || field3.isEmpty()) {
+            System.out.println("Field 3 is required.");
+            return false;
+        }
+        if (field4 == null || field4.isEmpty()) {
+            System.out.println("Field 4 is required.");
+            return false;
+        }
+
+
+        return true;
+    }
 
 }
-
-
-
-
