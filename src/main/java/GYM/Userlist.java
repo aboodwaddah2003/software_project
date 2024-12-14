@@ -66,7 +66,8 @@ public class Userlist {
         int index = search(username);
         if (index != -1) {
             User user = users.get(index);
-            if (user instanceof Client) {
+            if (user instanceof Client)
+            {
                 Client client = (Client) user;
                 if (newEmail != null && IsValidEmail(newEmail)) {
                     client.setEmail(newEmail);
@@ -75,7 +76,7 @@ public class Userlist {
                     client.setPassword(newPassword);
                 }
                 if (newSubscription != null && IsValidSubscriptionPlan(newSubscription)) {
-                    client.setSubscriptionPlan(newSubscription);
+                    client.setSubscriptionPlans(newSubscription);
                 }
                 return true;
             }
@@ -119,14 +120,7 @@ public class Userlist {
         return sub.equals("Basic") || sub.equals("Premium") || sub.equals("Gold") || sub.equals("Silver") || sub.equals("Prime");
     }
 
-    public boolean areAllFieldsFilled(String... fields) {
-        for (String field : fields) {
-            if (field == null || field.isEmpty()) {
-                return false;
-            }
-        }
-        return true;
-    }
+
 
     public boolean deleteUser(String username) {
         int index = search(username);
@@ -137,24 +131,19 @@ public class Userlist {
         return false;
     }
 
-    public boolean allFieldsisFull(String userName, String password, String email, String role) {
-        if (!userName.isEmpty() && !password.isEmpty() && !email.isEmpty() && !role.isEmpty()) {
-            return true;
-        }
-        return false;
-    }
 
 
-    public boolean IsCanBeUser(String username, String password, String email, String phone, String subscriptionPlan) {
 
-        if (!areAllFieldsFilled(username, password, email, phone, subscriptionPlan)) {
+    public boolean IsCanBeUser(String username, String password, String email, String subscriptionPlan) {
+
+        if (!allFieldsisIsFull(username, password, email, subscriptionPlan)) {
             return false;
         }
 
 
         if (search(username) != -1) {
             System.out.println("Username already exists.");
-            return false; // إذا كان اسم المستخدم مكرر
+            return false;
         }
 
 
@@ -164,9 +153,7 @@ public class Userlist {
         }
 
 
-        if (!isValidPhoneNumber(phone)) {
-            return false;
-        }
+
 
 
         if (!isValidSubscriptionPlan(subscriptionPlan)) {

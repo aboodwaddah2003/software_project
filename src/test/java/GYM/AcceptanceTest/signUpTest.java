@@ -20,7 +20,7 @@ public Userlist user;
     }
     @When("the user enter a valid username {string} and {string} and {string}  and {string} and'Basic'")
     public void the_user_enter_a_valid_username_and_and_and_and_owner(String string, String string2, String string3, String string4) {
-        state=user.IsCanBeUser(string,string2 ,string3,string4,"Basic");
+        state=user.IsCanBeUser(string,string2 ,string3,"Basic");
         if(state)
         {
             Assertions.assertTrue(true);
@@ -36,7 +36,7 @@ System.out.println("The signup success");
 
     @When("the user enter the username {string} that is exist already")
     public void the_user_enter_the_username_that_is_exist_already(String string) {
-     state=user.IsCanBeUser(string,"a12sd","anything","anything","anything");
+     state=user.IsCanBeUser(string,"a12sd","anything","anything");
         if(!state)
         {
             Assertions.assertTrue(true);
