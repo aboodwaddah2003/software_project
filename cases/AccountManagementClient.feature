@@ -3,10 +3,10 @@ Feature: Account Management
   Scenario: Client creates profiles with personal details
     Given the client is on the profile creation page
     When the client enters valid personal details
-      | name   | age | goals        |
-      | adham   | 25  | Weight Loss  |
-      | ahmad  | 30  | Muscle Gain  |
-      | mohammad   | 28  | Weight Loss  |
+      | name      | age | goals        |
+      | Adham     | 25  | Weight Loss  |
+      | Ahmad     | 30  | Muscle Gain  |
+      | Mohammad  | 28  | Weight Loss  |
     Then the system successfully saves the client's profile
     And shows a confirmation message "Profile created successfully"
 
@@ -23,7 +23,7 @@ Feature: Account Management
   Scenario: Client tries to create a profile with missing details
     Given the client is on the profile creation page
     When the client leaves the age field empty
-      | name   | goals        |
-      | adham   | Weight Loss  |
-      | ahmad  | Muscle Gain  |
+      | name      | goals        |
+      | Adham     | Weight Loss  |
+      | Ahmad     | Muscle Gain  |
     Then the system shows an error message "All fields are required"

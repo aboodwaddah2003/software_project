@@ -7,15 +7,20 @@ public class Client extends User {
     private int age;
     private String fitnessGoals;
     private String dietaryPreferences;
-    private List<Program> enrolledPrograms; // قائمة لتخزين البرامج المسجل فيها العميل
+    private final List<Program> enrolledPrograms;
 
-
-    public Client(String userName, String email, String password, String type, String subscriptionPlan) {
-        super(userName, email, password, type, subscriptionPlan);
-        this.enrolledPrograms = new ArrayList<>(); // إنشاء القائمة عند إنشاء العميل
+    public Client(String userName) {
+        super(userName, "default_email@example.com", "default_password", "Client", "Basic");
+        this.enrolledPrograms = new ArrayList<>();
     }
 
+    // Constructor
+    public Client(String userName, String email, String password, String type, String subscriptionPlan) {
+        super(userName, email, password, type, subscriptionPlan);
+        this.enrolledPrograms = new ArrayList<>();
+    }
 
+    // Getters and Setters
     public int getAge() {
         return age;
     }
@@ -40,9 +45,9 @@ public class Client extends User {
         this.dietaryPreferences = dietaryPreferences;
     }
 
-
+    // Enroll client in a program
     public void enrollInProgram(Program program) {
-        if (!enrolledPrograms.contains(program)) {
+        if (!isEnrolledInProgram(program)) {
             enrolledPrograms.add(program);
             System.out.println("Client successfully enrolled in: " + program.getName());
         } else {
@@ -50,18 +55,35 @@ public class Client extends User {
         }
     }
 
-
-    public List<Program> getEnrolledPrograms() {
-        return enrolledPrograms;
+    // Check if client is enrolled in a program
+    public boolean isEnrolledInProgram(Program program) {
+        return enrolledPrograms.contains(program);
     }
 
+    // Get enrolled programs
+    public List<Program> getEnrolledPrograms() {
+        return new ArrayList<>(enrolledPrograms); // Return a copy to maintain encapsulation
+    }
 
+    // View the schedule of a specific program
     public void viewSchedule(Program program) {
-        if (enrolledPrograms.contains(program)) {
+        if (isEnrolledInProgram(program)) {
             System.out.println("Displaying schedule for: " + program.getName());
-
+            System.out.println("Schedule: Monday 10AM, Wednesday 10AM, Friday 10AM"); // Example schedule
         } else {
             System.out.println("Client is not enrolled in this program.");
+        }
+    }
+
+    // Display all enrolled programs
+    public void displayEnrolledPrograms() {
+        if (enrolledPrograms.isEmpty()) {
+            System.out.println("Client is not enrolled in any programs.");
+        } else {
+            System.out.println("Enrolled programs:");
+            for (Program program : enrolledPrograms) {
+                System.out.println("- " + program.getName());
+            }
         }
     }
 }

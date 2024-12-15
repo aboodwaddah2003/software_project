@@ -12,7 +12,7 @@ public class Userlist {
         User u1 = new User("abood", "abood@gmail.com", "1234", "Client", "Basic");
         User u2 = new User("bayan", "bayan@gmail.com", "1234", "Instructor", "Prime");
         User u3 = new User("waddah", "waddah@gmail.com", "1234", "Instructor", "Prime");
-        Client c1 = new Client("ammar", "ammar@gmail.com", "1234", "Client", "Basic");
+        Client c1 = new Client("ammar");
         Instructor n1 = new Instructor("mahmoud", "moh@gmail.com", "10203040", "Instructor", "Gold");
         Instructor n2 = new Instructor("alaa22", "alaa22@gmail.com", "1234", "Instructor", "Silver");
 
@@ -54,7 +54,7 @@ public class Userlist {
     public boolean createClient(String username, String password, String email, String role, String subscription, int age, String goals, String dietaryPreferences) {
         if (search(username) == -1 && searchEmail(email) == -1) {
             if (IsValidUsername(username) && IsValidPass(password) && IsValidEmail(email) && IsValidRole(role) && IsValidSubscriptionPlan(subscription)) {
-                Client newClient = new Client(username, email, password, role, subscription);
+                Client newClient = new Client(username);
                 users.add(newClient);
                 return true;
             }

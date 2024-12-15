@@ -68,7 +68,7 @@ public class AccountHelper {
             return false;
         }
 
-        Client newClient = new Client(name, "email@example.com", "password123", "client", "Gold");
+        Client newClient = new Client(name);
         newClient.setAge(parsedAge);
         newClient.setFitnessGoals(goals);
 

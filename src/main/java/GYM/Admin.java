@@ -1,8 +1,5 @@
 package GYM;
 
-import io.cucumber.java.bs.A;
-import java.util.ArrayList;
-
 public class Admin  extends User {
 
     public Admin(String userName, String email, String password, String type, String subscriptionPlans) {
@@ -11,7 +8,8 @@ public class Admin  extends User {
     }
 
     public boolean addAccountClient(String name, String email, String pass, String type, String sub) {
-       Client newClient = new Client(name, email, pass, type, sub);
+        Client newClient = new Client(name, email, pass, type, sub);
+
         if (Userlist.search(newClient.getUserName()) == -1) {
             Userlist.users.add(newClient);
             return true;
