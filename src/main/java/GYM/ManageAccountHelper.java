@@ -1,12 +1,15 @@
 package GYM;
 
 import java.util.ArrayList;
+import java.util.Date;
 
-import static GYM.Userlist.users;
+import static GYM.Userlist.ActivityRecords;
 
 public class ManageAccountHelper {
 
     public static ArrayList<Instructor> instructors=new ArrayList<Instructor>();
+
+    private static boolean isActivityFilled = false;
     public static void fillData2() {
         Instructor n1 = new Instructor("alaa22", "alaa22@gmail.com", "1234", "Instructor", "Silver");
         Instructor n2 = new Instructor("mohammedK", "mohammed.k@gmail.com", "5678", "Instructor", "Gold");
@@ -43,6 +46,80 @@ public class ManageAccountHelper {
         return -1;
     }
 
+    public boolean fetchUserActivityPanel() {
+
+        if (User.loginRecords.size() > 0) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+public  static  void fillRecordActivity()
+{
+    if (!isActivityFilled) {
+        Userlist.recordActivity("alaa22", "update profile","15-09-2024");
+        Userlist.recordActivity("alaa22", "update profile","12-09-2024");
+        Userlist.recordActivity("alaa22", "update profile","14-09-2013");
+        Userlist.recordActivity("waddah", "update profile","14-09-2013");
+        Userlist.recordActivity("ahmad", "update profile","14-09-2013");
+
+        isActivityFilled = true;
+    }
+}
+
+public static boolean isValidFormatDate(String date)  ///15-09-2024
+{
+
+if(date.length()!=10)
+    return false;
+
+for(int i=0; i<date.length();i++)
+{
+    char s=date.charAt(i);
+    if(i==2 || i==5)
+    {
+        if (s != '-' && s != '/')
+            return false;
+    }
+    else  if(!Character.isDigit(s))
+        return false;
 
 
 }
+    try {
+
+        int day = Integer.parseInt(date.substring(0, 2));
+        int month = Integer.parseInt(date.substring(3, 5));
+        int year = Integer.parseInt(date.substring(6));
+
+
+        if (year < 2018 || year > 2024) {
+            return false;
+        }
+
+
+        if (month < 1 || month > 12) {
+            return false;
+        }
+
+
+        if (day < 1 || day > 30) {
+            return false;
+        }
+
+
+        return true;
+
+    } catch (NumberFormatException | StringIndexOutOfBoundsException e) {
+
+        return false;
+    }
+}
+
+
+}
+
+
+
+

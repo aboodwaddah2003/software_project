@@ -1,32 +1,41 @@
 package GYM;
 
+import java.sql.Time;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+
 public class User {
-    public static int count=0;
+    private static int onlineUsers = 0;
+    public  int count;
     private String userName;
     private int id;
     private String email;
     private String password;
 
-
-
     private boolean isActive;
 
     private String type;
+ public static ArrayList<String> loginRecords =new ArrayList<String>();
 
 
+    private static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 
     private String status;
 
     private  String subscriptionPlans;
 
+    public  User()
+    {
+
+    }
     public User(String userName, String email, String password, String type,String subscriptionPlans)
     {
         this.email=email;
         this.userName=userName;
         this.password=password;
         this.type=type;
-        count++;
-        this.id=count;
+        this.count=0;
         this.subscriptionPlans=subscriptionPlans;
         this.isActive=true;
         this.status="pending";
@@ -97,4 +106,35 @@ public class User {
     public void setStatus(String status) {
         this.status = status;
     }
+
+
+
+    public void login()
+    {
+onlineUsers++;
+  this.count++;
+        LocalDateTime now = LocalDateTime.now();
+        String formattedTime = now.format(formatter);
+       String record = "User: " +this.getUserName() + ", Login Order: " + this.count + ", Time: " + now.format(formatter);
+        loginRecords.add(record);
+    }
+
+    public void logout()
+    {
+        onlineUsers--;
+        LocalDateTime now = LocalDateTime.now();
+        String formattedTime = now.format(formatter);
+        String record = "User: " +this.getUserName()+" is logout form system " + now.format(formatter);
+        loginRecords.add(record);
+    }
+
+public  void  printLoginRecords()
+{
+    System.out.println("the number of activity user is "+onlineUsers);
+    for (String s:loginRecords)
+        System.out.println(s);
+}
+
+
+
 }

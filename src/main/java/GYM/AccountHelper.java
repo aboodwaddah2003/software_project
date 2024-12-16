@@ -31,7 +31,7 @@ class ClientRepository {
 
 public class AccountHelper {
 
-    private ClientRepository clientRepository;  // حقن التبعية
+    private ClientRepository clientRepository;
 
 
     public AccountHelper(ClientRepository clientRepository) {

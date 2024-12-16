@@ -5,10 +5,17 @@ public class Program {
     private String difficultyLevel;
     private String focusArea;
 
-    public Program(String name, String difficultyLevel, String focusArea) {
+
+
+    private  double price;
+    private  int count ;
+
+    public Program(String name, String difficultyLevel, String focusArea,double price) {
         this.name = name;
         this.difficultyLevel = difficultyLevel;
         this.focusArea = focusArea;
+        count=0;
+       this.price=price;
     }
 
     public String getName() {
@@ -31,6 +38,8 @@ public class Program {
         return name.equals(program.name);
     }
 
+
+
     @Override
     public String toString() {
         return "Program{" +
@@ -38,5 +47,23 @@ public class Program {
                 ", difficultyLevel='" + difficultyLevel + '\'' +
                 ", focusArea='" + focusArea + '\'' +
                 '}';
+    }
+
+    public  void  increaseSubProgramCount()
+    {
+        this.count++;
+    }
+    public int numOfClientSub()
+    {
+        return this.count;
+    }
+
+
+    public double getPrice() {
+        return price;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
     }
 }

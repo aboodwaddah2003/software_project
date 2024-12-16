@@ -4,18 +4,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ProgramService {
-    private final List<Program> allPrograms;
-    private final List<Client> registeredClients;
+    public static List<Program> allPrograms=new ArrayList<>();
+    public static List<Client> registeredClients=new ArrayList<>();
 
-    public ProgramService() {
-        allPrograms = new ArrayList<>();
-        registeredClients = new ArrayList<>();
+    public  ProgramService() {
 
 
-        allPrograms.add(new Program("Muscle Gain Program", "Advanced", "Muscle building"));
-        allPrograms.add(new Program("Weight Loss Program", "Beginner", "Weight loss"));
-        allPrograms.add(new Program("Flexibility Program", "Intermediate", "Flexibility"));
-        allPrograms.add(new Program("Yoga Program", "Beginner", "Flexibility"));
+        if (allPrograms.isEmpty()) {
+            allPrograms.add(new Program("Muscle Gain Program", "Advanced", "Muscle building",100));
+            allPrograms.add(new Program("Weight Loss Program", "Beginner", "Weight loss",120));
+            allPrograms.add(new Program("Flexibility Program", "Intermediate", "Flexibility",135.50));
+            allPrograms.add(new Program("Yoga Program", "Beginner", "Flexibility",160));
+        }
     }
 
 
@@ -41,20 +41,25 @@ public class ProgramService {
     }
 
 
-    public String enrollClientInProgram(Client client, String programName) {
-        Program program = getProgramByName(programName); // البحث عن البرنامج بالاسم
+    public  static String enrollClientInProgram(Client client, String programName) {
+        Program program = getProgramByName(programName);
         if (program == null) {
             return "Error: Program '" + programName + "' not found.";
         }
 
         if (client.getEnrolledPrograms().contains(program)) {
             return "Client is already enrolled in " + program.getName();
-        } else {
+        }
+        else {
             client.enrollInProgram(program);
+            program.increaseSubProgramCount();
 
             if (!registeredClients.contains(client)) {
+
                 registeredClients.add(client);
+
             }
+
             return "Client successfully enrolled in " + program.getName();
         }
     }
@@ -70,13 +75,13 @@ public class ProgramService {
     }
 
 
-    public Program getProgramByName(String programName) {
+    public static Program getProgramByName(String programName) {
         for (Program program : allPrograms) {
-            if (program.getName().equalsIgnoreCase(programName)) {
+            if (program.getName().equals(programName)) {
                 return program;
             }
         }
-        return null;
+        return null; // Return null if no match found
     }
 
 
@@ -95,4 +100,7 @@ public class ProgramService {
     public List<Program> getAllPrograms() {
         return allPrograms;
     }
+
+
+
 }

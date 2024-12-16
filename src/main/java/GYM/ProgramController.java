@@ -56,6 +56,6 @@ public class ProgramController {
     }
 
     public List<Client> getRegisteredClients() {
-        return programService.getRegisteredClients(); // إرجاع العملاء المسجلين
+        return programService.getRegisteredClients();
     }
 }

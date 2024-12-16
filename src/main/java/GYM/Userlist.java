@@ -1,11 +1,15 @@
 package GYM;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Userlist {
     public static ArrayList<User> users = new ArrayList<>();
+    public static ArrayList<String> ActivityRecords =new ArrayList<String>();
+    private static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 
     public static void fillData() {
         User u = new User("osama", "osama@gmail.com", "1234", "Admin", " ");
@@ -24,6 +28,19 @@ public class Userlist {
         addUserIfNotExists(n1);
         addUserIfNotExists(n2);
     }
+
+    public static void fillData3()
+    {
+        User u3 = new User("waddah", "waddah@gmail.com", "1234", "Instructor", "Prime");
+        Client c1 = new Client("ammar", "ammar@gmail.com", "1234", "Client", "Basic");
+        Instructor n1 = new Instructor("mahmoud", "moh@gmail.com", "10203040", "Instructor", "Gold");
+        u3.login();
+        c1.login();
+        c1.logout();
+        n1.login();
+        u3.login();
+    }
+
 
     private static void addUserIfNotExists(User user) {
         if (search(user.getUserName()) == -1) {
@@ -180,5 +197,25 @@ public class Userlist {
 
         return true;
     }
+    public static void recordActivity(String userName, String action,String date) {
+
+        String record = "User: " + userName + ", Action: " + action + ",Date: " + date;
+        ActivityRecords.add(record);
+
+    }
+
+public void fillDataClientEnrollInProgram()
+{
+    Client C1 = new Client("Mahmoud", "moh@gmail.com", "10203040", "Instructor", "Gold");
+    Client C2 = new Client("Alaa", "alaa@yahoo.com", "20304050", "Student", "Silver");
+    Client C3 = new Client("Hiba", "hiba@gmail.com", "30405060", "Teacher", "Platinum");
+    Client C4 = new Client("Omar", "omar@hotmail.com", "40506070", "Engineer", "Gold");
+    Client C5 = new Client("Sara", "sara@gmail.com", "50607080", "Doctor", "Bronze");
+    ProgramService.enrollClientInProgram(C1,"Muscle Gain Program");
+    ProgramService.enrollClientInProgram(C2,"Muscle Gain Program");
+    ProgramService.enrollClientInProgram(C3,"Muscle Gain Program");
+
+}
+
 
 }

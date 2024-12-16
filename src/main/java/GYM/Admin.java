@@ -1,6 +1,17 @@
 package GYM;
 
+import io.cucumber.java.bs.A;
+
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
+
+import static GYM.Userlist.ActivityRecords;
+
 public class Admin  extends User {
+
 
     public Admin(String userName, String email, String password, String type, String subscriptionPlans) {
         super(userName, email, password, type, subscriptionPlans);
@@ -8,8 +19,7 @@ public class Admin  extends User {
     }
 
     public boolean addAccountClient(String name, String email, String pass, String type, String sub) {
-        Client newClient = new Client(name, email, pass, type, sub);
-
+       Client newClient = new Client(name, email, pass, type, sub);
         if (Userlist.search(newClient.getUserName()) == -1) {
             Userlist.users.add(newClient);
             return true;
@@ -120,7 +130,63 @@ public class Admin  extends User {
         return false;
     }
 
+    public boolean ShowUserAction(String userName) {
+
+        boolean userFound = false;
+if(Userlist.search(userName)==-1)
+    return false;
+
+        for (String record : ActivityRecords) {
+            if (record.contains(userName)) {
+                System.out.println(record);
+                userFound = true;
+            }
+        }
+
+        return userFound;
+    }
+
+    public boolean ShowDateAction(String date) {
 
 
+        if(ManageAccountHelper.isValidFormatDate(date)) {
+
+            for (String record : ActivityRecords) {
+                if (record.contains(date)) {
+                    System.out.println(record);
+
+                }
+            }
+        }
+
+
+        else
+            return false;
+
+        return true;
+    }
+
+    public boolean showProgramsStatistics()
+    {
+        if(ProgramService.allPrograms.isEmpty())
+            return  false;
+        for(Program p : ProgramService.allPrograms)
+        {
+            String s= p.getName()+"the number of enroll client is "+p.numOfClientSub();
+            System.out.println(s);
+        }
+        return true;
+    }
+
+    public double calculateTotalRevenue() {
+        double totalRevenue = 0;
+        for (Program program : ProgramService.allPrograms) {
+            totalRevenue += program.getPrice() * program.numOfClientSub();
+            String s="The total amount form :"+program.getName()+" is "+program.numOfClientSub()*program.getPrice();
+            System.out.println(s);
+        }
+
+        return totalRevenue;
+    }
 }
 

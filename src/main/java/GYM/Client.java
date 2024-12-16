@@ -7,7 +7,7 @@ public class Client extends User {
     private int age;
     private String fitnessGoals;
     private String dietaryPreferences;
-    private final List<Program> enrolledPrograms;
+    private static List<Program> enrolledPrograms;
 
     public Client(String userName) {
         super(userName, "default_email@example.com", "default_password", "Client", "Basic");
@@ -46,7 +46,7 @@ public class Client extends User {
     }
 
     // Enroll client in a program
-    public void enrollInProgram(Program program) {
+    public  void enrollInProgram(Program program) {
         if (!isEnrolledInProgram(program)) {
             enrolledPrograms.add(program);
             System.out.println("Client successfully enrolled in: " + program.getName());
@@ -86,4 +86,7 @@ public class Client extends User {
             }
         }
     }
+
+
+
 }
