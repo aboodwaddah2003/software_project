@@ -14,7 +14,7 @@ import static GYM.Userlist.ActivityRecords;
 
 public class Admin  extends User {
 
-
+///
     public Admin(String userName, String email, String password, String type, String subscriptionPlans) {
         super(userName, email, password, type, subscriptionPlans);
 
