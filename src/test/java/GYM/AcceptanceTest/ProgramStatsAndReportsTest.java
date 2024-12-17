@@ -21,7 +21,7 @@ public Admin A1;
     public void the_admin_is_logged_into_the_dashboard() {
    p=new ProgramService();
    u.fillDataClientEnrollInProgram();
-        A1=new Admin("abood","abood@gmail.com","ab12345678","Admin","Owner");
+   A1=new Admin("abood","abood@gmail.com","ab12345678","Admin","Owner");
     }
     @When("the admin navigates to the Program Statistics section")
     public void the_admin_navigates_to_the_program_statistics_section() {
@@ -38,13 +38,12 @@ else
 
     @When("the admin navigates to the Reports section")
     public void the_admin_navigates_to_the_reports_section() {
-      A1.calculateTotalRevenue();
         if(A1.calculateTotalRevenue()!=0)
             state=true;
     }
     @When("selects Revenue Reports")
     public void selects_revenue_reports() {
-      if(A1.calculateTotalRevenue()==0)
+
           if(state)
               Assertions.assertTrue(state);
       else
@@ -53,7 +52,7 @@ else
     }
     @Then("the system calculates the total revenue and display it")
     public void the_system_calculates_the_total_revenue_and_display_it() {
-      System.out.println("The total Revenue amount is "+ A1.calculateTotalRevenue());
+A1.generateRevenueReport();
     }
 
 }

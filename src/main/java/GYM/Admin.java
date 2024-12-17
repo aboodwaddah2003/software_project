@@ -2,6 +2,8 @@ package GYM;
 
 import io.cucumber.java.bs.A;
 
+import javax.swing.text.AbstractDocument.Content;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -182,11 +184,89 @@ if(Userlist.search(userName)==-1)
         double totalRevenue = 0;
         for (Program program : ProgramService.allPrograms) {
             totalRevenue += program.getPrice() * program.numOfClientSub();
-            String s="The total amount form :"+program.getName()+" is "+program.numOfClientSub()*program.getPrice();
-            System.out.println(s);
+
         }
 
         return totalRevenue;
     }
+
+    public void generateRevenueReport()
+    {
+      System.out.println("The total Revenue is "+calculateTotalRevenue());
+      System.out.println("**************************************************");
+      System.out.println("This is detail for revenue for each program");
+        double totalRevenue = 0;
+        for (Program program : ProgramService.allPrograms) {
+System.out.println(program.getName()+"The total revenue is "+program.numOfClientSub()*program.getPrice() );
+        }
+
+        }
+
+
+        public boolean  countActivePrograms(LocalDate d)
+        {
+            int activeProgramCount=0;
+           for( Program program :ProgramService.allPrograms)
+           {
+             if(!program.isCompleted(d))
+                 activeProgramCount++;
+           }
+           if (activeProgramCount==0 )
+                return false;
+
+           return true;
+        }
+
+
+    public boolean  countCompletedPrograms(LocalDate d)
+    {
+        int completedProgramCount=0;
+        for( Program program :ProgramService.allPrograms)
+        {
+            if(!program.isCompleted(d))
+                completedProgramCount++;
+        }
+        if ( completedProgramCount==0 )
+            return false;
+
+        return true;
+    }
+
+public void showActivePrograms(LocalDate d) {
+
+    for (Program program : ProgramService.allPrograms) {
+        if (!program.isCompleted(d))
+            System.out.println(program.getName() + "is active program The start date for program is  " + program.getStartDate() + " the duration for program is " + program.getDuration());
+    }
 }
+
+    public void showCompletedPrograms(LocalDate d) {
+
+        for (Program program : ProgramService.allPrograms) {
+            if (program.isCompleted(d))
+                System.out.println(program.getName() + "is completed program The start date for program is  " + program.getStartDate() + " the duration for program is " + program.getDuration());
+        }
+    }
+
+
+    public boolean updateContentStatus(String title, String newStatus) {
+        if (ContentMangerService.contentMangers.isEmpty()) {
+            return false;
+        }
+
+        boolean found = false;
+        for (ContentManger content : ContentMangerService.contentMangers) {
+            if (content.getTitle().equals(title)) {
+                content.setStatus(newStatus);
+                found = true;
+            }
+        }
+
+        return found;
+    }
+
+
+    }
+
+
 

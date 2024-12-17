@@ -7,7 +7,7 @@ public class Client extends User {
     private int age;
     private String fitnessGoals;
     private String dietaryPreferences;
-    private static List<Program> enrolledPrograms;
+    private List<Program> enrolledPrograms;
 
     public Client(String userName) {
         super(userName, "default_email@example.com", "default_password", "Client", "Basic");

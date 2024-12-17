@@ -206,16 +206,17 @@ public class Userlist {
 
 public void fillDataClientEnrollInProgram()
 {
-    Client C1 = new Client("Mahmoud", "moh@gmail.com", "10203040", "Instructor", "Gold");
-    Client C2 = new Client("Alaa", "alaa@yahoo.com", "20304050", "Student", "Silver");
-    Client C3 = new Client("Hiba", "hiba@gmail.com", "30405060", "Teacher", "Platinum");
-    Client C4 = new Client("Omar", "omar@hotmail.com", "40506070", "Engineer", "Gold");
-    Client C5 = new Client("Sara", "sara@gmail.com", "50607080", "Doctor", "Bronze");
-    ProgramService.enrollClientInProgram(C1,"Muscle Gain Program");
-    ProgramService.enrollClientInProgram(C2,"Muscle Gain Program");
-    ProgramService.enrollClientInProgram(C3,"Muscle Gain Program");
 
-}
+
+        Client C1 = new Client("Mahmoud", "moh@gmail.com", "10203040", "Instructor", "Gold");
+        Client C2 = new Client("Alaa", "alaa@yahoo.com", "20304050", "Student", "Silver");
+        Client C3 = new Client("Hiba", "hiba@gmail.com", "30405060", "Teacher", "Platinum");
+        ProgramService.enrollClientInProgram(C1, "Muscle Gain Program");
+        ProgramService.enrollClientInProgram(C2, "Muscle Gain Program");
+        ProgramService.enrollClientInProgram(C3, "Muscle Gain Program");
+
+    }
+
 
 
 }

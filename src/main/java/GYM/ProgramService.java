@@ -1,21 +1,45 @@
 package GYM;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 public class ProgramService {
-    public static List<Program> allPrograms=new ArrayList<>();
-    public static List<Client> registeredClients=new ArrayList<>();
+    public static List<Program> allPrograms = new ArrayList<>();
+    public static List<Client> registeredClients = new ArrayList<>();
 
-    public  ProgramService() {
+    public static List<String>AttendanceRecord = new ArrayList<>();
 
+
+    public ProgramService() {
 
         if (allPrograms.isEmpty()) {
-            allPrograms.add(new Program("Muscle Gain Program", "Advanced", "Muscle building",100));
-            allPrograms.add(new Program("Weight Loss Program", "Beginner", "Weight loss",120));
-            allPrograms.add(new Program("Flexibility Program", "Intermediate", "Flexibility",135.50));
-            allPrograms.add(new Program("Yoga Program", "Beginner", "Flexibility",160));
+            allPrograms.add(new Program("Muscle Gain Program", "Advanced", "Muscle building", 100,12));
+            allPrograms.add(new Program("Weight Loss Program", "Beginner", "Weight loss", 120,6));
+            allPrograms.add(new Program("Flexibility Program", "Intermediate", "Flexibility", 135.50,8));
+            allPrograms.add(new Program("Yoga Program", "Beginner", "Flexibility", 160,7));
         }
+    }
+
+    public static void fillDataProgram()
+    {
+        Program p1= ProgramService.getProgramByName("Muscle Gain Program") ;
+        Program p2= ProgramService.getProgramByName("Weight Loss Program") ;
+        Program p3= ProgramService.getProgramByName("Flexibility Program") ;
+        Program p4= ProgramService.getProgramByName("Yoga Program") ;
+
+
+        LocalDate startDateP1 = LocalDate.of(2024, 12, 1);
+        LocalDate startDateP2 = LocalDate.of(2024, 12, 12);
+        LocalDate startDateP3 = LocalDate.of(2024, 11, 1);
+        LocalDate startDateP4 = LocalDate.of(2024, 11, 15);
+        p1.setStartDate(startDateP1);
+        p2.setStartDate(startDateP2);
+        p3.setStartDate(startDateP3);
+        p4.setStartDate(startDateP4);
+
+
     }
 
 
@@ -81,7 +105,7 @@ public class ProgramService {
                 return program;
             }
         }
-        return null; // Return null if no match found
+        return null;
     }
 
 

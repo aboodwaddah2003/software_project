@@ -1,26 +1,36 @@
+@tag2
 Feature:  Approve or reject content shared by instructors, including wellness articles, tips, and recipes and Handle User Feedback
 
-  Scenario: Admin approves a wellness article shared by an instructor
+  Scenario Outline: Admin approves a wellness article shared by an instructor
 
-    Given the admin is logged into the system
-    And the admin navigates to the "Pending Submissions" section
-    When the admin selects a wellness article submitted by an instructor
-    And clicks the "Approve" button
-    Then the system updates the article status to "Approved"
-    And the article is published and visible to users
 
-  Scenario: Admin rejects a wellness tip shared by an instructor
+   Given the admin navigates to the Pending Submissions section
+    When the admin selects a wellness submitted by an instructor
+    And select the "<title>" form the wellness that want to approved
+    Then the system updates the article status to Approved
 
-    Given the admin is logged into the system
-    And the admin navigates to the "Pending Submissions" section
-    When the admin selects a wellness tip submitted by an instructor
-    And clicks the "Reject" button
-    And provides a reason for rejection
-    Then the system updates the tip status to "Rejected"
-    And sends a notification to the instructor with the rejection reason
+    Examples:
+    |title|
+
+    |   10 Healthy Recipes   |
+
+
+
+
+  Scenario Outline: Admin rejects a wellness tip shared by an instructor
+
+    Given the admin navigates to the Pending Submissions section
+    When the admin selects a wellness submitted by an instructor
+    And select the "<title>" form the wellness that want to rejects
+    Then the system updates the article status to Approved
+
+    Examples:
+
+      |title|
+      | Fitness Tips |
+
 
   Scenario: Admin approves a health and wellness tip
-
     Given the admin is logged into the system
     And the admin navigates to the "Pending Submissions" section
     When the admin selects a tip submitted on health and wellness

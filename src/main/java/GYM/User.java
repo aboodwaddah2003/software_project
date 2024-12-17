@@ -18,7 +18,7 @@ public class User {
     private String type;
  public static ArrayList<String> loginRecords =new ArrayList<String>();
 
-
+    public static User currentUser;
     private static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 
     private String status;
