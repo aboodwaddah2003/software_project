@@ -9,7 +9,7 @@ import org.junit.runner.RunWith;
         features = "cases",
         monochrome = true,
         snippets = SnippetType.CAMELCASE,
-        glue = {"GYM.AcceptanceTest"},tags = "@tag2"
+        glue = {"GYM.AcceptanceTest"}
 
 )
 public class acceptanceTest
