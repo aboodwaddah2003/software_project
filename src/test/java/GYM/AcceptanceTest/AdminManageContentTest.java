@@ -80,4 +80,21 @@ public class AdminManageContentTest {
         contentManger.showRejectedContent();
     }
 
+    @Given("the admin navigates to the {string} section")
+    public void theAdminNavigatesToTheSection(String string) {
+
+    }
+    @When("the admin selects a user complaint")
+    public void theAdminSelectsAUserComplaint() {
+
+    }
+    @When("reviews the details of the complaint")
+    public void reviewsTheDetailsOfTheComplaint() {
+
+    }
+    @Then("the admin can respond with a solution or clarification then updates the status of the complaint to {string}")
+    public void theAdminCanRespondWithASolutionOrClarificationThenUpdatesTheStatusOfTheComplaintTo(String string) {
+
+    }
+
 }

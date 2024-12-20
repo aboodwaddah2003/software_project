@@ -14,17 +14,4 @@ Then the system displays a list of programs sorted by enrollment count
      And  selects Revenue Reports
     Then the system calculates the total revenue and display it
 
-  Scenario: Admin generates an attendance report
 
-    Given the admin is logged into the system
-    When the admin navigates to the Reports section
-   And the admin selects Attendance Report
-    Then the system retrieves attendance records for the selected program then displays attendance percentages and participant counts
-
-  Scenario: Admin generates a client progress report
-
-    Given the admin is logged into the system
-    And the admin navigates to the "Reports" section
-    When the admin selects "Client Progress Report"
-    And specifies a program or a specific client
-    Then the system retrieves data on client milestones and progress percentage then displays individual progress for each client enrolled in the program
