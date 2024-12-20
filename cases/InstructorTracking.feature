@@ -14,5 +14,5 @@ Feature: Instructor Tracking the progress of clients
     And the instructor clicks on the "clientsTracking" button9
     When the instructor select a client and compose a motivational message
     And the instructor clicks on the "sendMotivation" button10
-    Then the system sends the message to the selected clients
+    Then An messasge appear to clients
     And the clients receive the reminders via their profils

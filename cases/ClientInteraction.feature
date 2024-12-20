@@ -5,7 +5,7 @@ Feature: Instructor interacting with the clients
     And the instructor clicks on the "clientsTracking" botton
     When the instructor select one or more enrolled clients and compose a message
     And the instructor clicks on the "send" bottonn
-    Then the system sends the message to the selected clients
+    Then a message arrive to the buyers
     And the clients receive the message in their accounts.
 
   Scenario:the instructor Cancel sending
@@ -15,7 +15,7 @@ Feature: Instructor interacting with the clients
 
   Scenario: the instructor provides individual feedback
     Given the instructor is in the client profile
-    When the instructor compose a message and clicks on "send feedback" button2
+    When the instructor write a message and clicks on "send feedback" button2
     Then the system sends the feedback to the client
 
   Scenario: the instructor provides individual report
