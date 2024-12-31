@@ -50,9 +50,10 @@ Feature: Feedback and Reviews
     # Scenario 5: Client submits feedback for multiple programs
   Scenario: Client submits feedback for multiple programs
 
-    When the client submits feedback for each program
-      | programName         | rating | review             | improvementSuggestions            |
-      | Muscle Gain Program | 4      | Great program!     | Include more advanced techniques. |
-      | Weight Loss Program | 5      | Excellent program! | More variety in exercises.        |
+    Given the client submits feedback for each program
+      | Program Name        | Rating | Review              | Improvement Suggestions   |
+      | Muscle Gain Program | 4      | Great program!      | Include more advanced techniques |
+      | Weight Loss Program | 5      | Excellent program!  | More variety in exercises  |
+
 
     Then the system submits the feedback for all the programs successfully

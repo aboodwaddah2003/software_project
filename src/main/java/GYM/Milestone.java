@@ -5,13 +5,11 @@ public class Milestone {
     private String bmi;
     private String attendance;
 
-
     public Milestone(String weight, String bmi, String attendance) {
         this.weight = weight;
         this.bmi = bmi;
         this.attendance = attendance;
     }
-
 
     public String getWeight() {
         return weight;
@@ -26,12 +24,11 @@ public class Milestone {
     }
 
     public void setWeight(String newWeight) {
-
         if (newWeight == null || newWeight.isEmpty()) {
             System.out.println("Invalid weight value.");
             return;
         }
-        this.weight = newWeight;  // تحديث الوزن
+        this.weight = newWeight;
         System.out.println("Weight updated to: " + newWeight);
     }
 
@@ -41,10 +38,9 @@ public class Milestone {
             return;
         }
 
-
         try {
             double bmiValue = Double.parseDouble(newBmi);
-            if (bmiValue < 10 || bmiValue > 50) {  // افتراض نطاق معقول للـ BMI
+            if (bmiValue < 10 || bmiValue > 50) {
                 System.out.println("BMI value is out of acceptable range (10 - 50).");
             } else {
                 this.bmi = newBmi;
@@ -61,10 +57,9 @@ public class Milestone {
             return;
         }
 
-
         try {
             String[] parts = newAttendance.split(" ");
-            int days = Integer.parseInt(parts[0]); // استخراج عدد الأيام من السلسلة النصية
+            int days = Integer.parseInt(parts[0]);
 
             if (days < 0) {
                 System.out.println("Attendance days cannot be negative.");
@@ -76,5 +71,4 @@ public class Milestone {
             System.out.println("Invalid attendance format. Please use 'X days'.");
         }
     }
-
 }
