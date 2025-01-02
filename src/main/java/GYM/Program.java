@@ -41,11 +41,17 @@ public class Program {
 
     @Override
     public boolean equals(Object obj) {
-        if (this == obj) return true;
-        if (obj == null || getClass() != obj.getClass()) return false;
-        Program program = (Program) obj;
-        return name.equals(program.name);
+        if (this == obj) return true; // Same object comparison
+        if (obj == null || getClass() != obj.getClass()) return false; // Null or different class
+        Program program = (Program) obj; // Cast to the correct type
+        return name.equals(program.name); // Compare relevant fields
     }
+
+    @Override
+    public int hashCode() {
+        return name.hashCode(); // Ensure consistency with equals()
+    }
+
 
 
 
