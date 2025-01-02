@@ -128,13 +128,22 @@ onlineUsers++;
         loginRecords.add(record);
     }
 
-public  void  printLoginRecords()
+public static void  printLoginRecords()
 {
     System.out.println("the number of activity user is "+onlineUsers);
     for (String s:loginRecords)
         System.out.println(s);
 }
 
-
+    @Override
+    public String toString() {
+        return "User{" +
+                " userName='" + userName + '\'' +
+                ", email='" + email + '\'' +
+                ", password='" + password + '\'' +
+                ", isActive=" + isActive +
+                ", type='" + type + '\'' +
+                '}';
+    }
 
 }

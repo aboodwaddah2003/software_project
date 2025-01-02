@@ -40,10 +40,20 @@ Feature:Approve or reject content shared by instructors, including wellness arti
 
 
 
-  Scenario: Admin addresses a user complaint
+  Scenario: the admin see the feedback from users about the programs
 
     Given the admin is logged into the system
-    And the admin navigates to the "User Feedback and Complaints" section
-    When the admin selects a user complaint
-    And reviews the details of the complaint
-    Then the admin can respond with a solution or clarification then updates the status of the complaint to "Resolved"
+    When the admin navigates to the User Feedback
+    Then reviews the details of the feedback
+
+
+  Scenario: the admin see the complement from users
+
+    Given the admin is logged into the system
+    When the admin navigates to the User complement
+    Then reviews the details of the complement
+
+  Scenario: Admin resolves a complaint
+    Given the admin is logged into the system
+    When the admin navigates to the User complement
+    Then the admin reviews the details of each complaint and resolves it by updating its status to Resolved

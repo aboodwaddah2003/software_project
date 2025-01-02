@@ -20,7 +20,7 @@ public Userlist user;
     }
     @When("the user enter a valid username {string} and {string} and {string}  and {string} and'Basic'")
     public void the_user_enter_a_valid_username_and_and_and_and_owner(String string, String string2, String string3, String string4) {
-        state=user.IsCanBeUser(string,string2 ,string3,"Basic");
+        state=user.IsCanBeUser(string,string2 ,string3,"basic");
         if(state)
         {
             Assertions.assertTrue(true);

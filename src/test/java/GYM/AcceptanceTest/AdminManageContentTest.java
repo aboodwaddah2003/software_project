@@ -1,9 +1,6 @@
 package GYM.AcceptanceTest;
 
-import GYM.Admin;
-import GYM.Client;
-import GYM.ContentMangerService;
-import GYM.Instructor;
+import GYM.*;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -11,19 +8,21 @@ import org.junit.jupiter.api.Assertions;
 
 public class AdminManageContentTest {
     ContentMangerService contentManger;
-    Admin A1 ;
+    Admin  A1 = new Admin("abood", "abood@gmail.com", "ab12345678", "Admin", "Owner");
     Instructor c1;
 
     boolean state;
     static boolean flag = false;
-    public  Client u1;
+    public  Client  u1=new Client("waddah", "waddah@gmail.com", "1234", "Instructor", "Prime");
+    ProgramService programService;
+    FeedbackService feedbackService=new FeedbackService();
     @Given("the admin navigates to the Pending Submissions section")
     public void the_admin_navigates_to_the_pending_submissions_section() {
-     A1 = new Admin("abood", "abood@gmail.com", "ab12345678", "Admin", "Owner");
+
     contentManger=new ContentMangerService();
      c1=new Instructor("mahmoud", "moh@gmail.com", "10203040", "Instructor", "");
-         u1=new Client("waddah", "waddah@gmail.com", "1234", "Instructor", "Prime");
-
+      programService=new ProgramService();
+      feedbackService.fillDataFeedback();
     }
     @When("the admin selects a wellness submitted by an instructor")
     public void the_admin_selects_a_wellness_submitted_by_an_instructor()
@@ -95,6 +94,39 @@ public class AdminManageContentTest {
     @Then("the admin can respond with a solution or clarification then updates the status of the complaint to {string}")
     public void theAdminCanRespondWithASolutionOrClarificationThenUpdatesTheStatusOfTheComplaintTo(String string) {
 
+    }
+
+    @When("the admin navigates to the User Feedback")
+    public void the_admin_navigates_to_the_user_feedback() {
+      state=  u1.submitFeedback("Muscle Gain Program", 4, "very good", "improve the tools");
+      if(state)
+          Assertions.assertTrue(state);
+      else
+          Assertions.fail("dvdv");
+    }
+    @Then("reviews the details of the feedback")
+    public void reviews_the_details_of_the_feedback() {
+     feedbackService.displayAllFeedbacks();
+    }
+
+    @When("the admin navigates to the User complement")
+    public void the_admin_navigates_to_the_user_complement() {
+        state=  u1.submitComplaint("the food service is not good");
+        state=  u1.submitComplaint("the price is very high");
+        state=  u1.submitComplaint("the wifi not good");
+        if(state)
+            Assertions.assertTrue(state);
+        else
+            Assertions.fail("dvdv");
+    }
+    @Then("reviews the details of the complement")
+    public void reviews_the_details_of_the_complement() {
+      feedbackService.displayAllComplaints();
+    }
+
+    @Then("the admin reviews the details of each complaint and resolves it by updating its status to Resolved")
+    public void the_admin_reviews_the_details_of_each_complaint_and_resolves_it_by_updating_its_status_to_resolved() {
+A1.resolveComplaint(1);
     }
 
 }

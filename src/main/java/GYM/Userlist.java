@@ -12,8 +12,8 @@ public class Userlist {
     private static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 
     public static void fillData() {
-        User u = new User("osama", "osama@gmail.com", "1234", "Admin", " ");
-        User u1 = new User("abood", "abood@gmail.com", "1234", "Client", "Basic");
+        Admin u = new Admin("osama", "osama@gmail.com", "1234", "Admin", " ");
+        Client u1 = new Client("abood", "abood@gmail.com", "1234", "Client", "Basic");
         User u2 = new User("bayan", "bayan@gmail.com", "1234", "Instructor", "Prime");
         User u3 = new User("waddah", "waddah@gmail.com", "1234", "Instructor", "Prime");
         Client c1 = new Client("ammar");
@@ -68,51 +68,98 @@ public class Userlist {
         return -1;
     }
 
-    public boolean createClient(String username, String password, String email, String role, String subscription, int age, String goals, String dietaryPreferences) {
-        if (search(username) == -1 && searchEmail(email) == -1) {
-            if (IsValidUsername(username) && IsValidPass(password) && IsValidEmail(email) && IsValidRole(role) && IsValidSubscriptionPlan(subscription)) {
-                Client newClient = new Client(username);
-                users.add(newClient);
-                return true;
-            }
+   /* public boolean createClient(String username, String password, String email, String role, String subscription) {
+        if (search(username) != -1) {
+            System.out.println("Error: Username already exists.");
+            return false;
         }
-        return false;
+
+        if (searchEmail(email) != -1) {
+            System.out.println("Error: Email already exists.");
+            return false;
+        }
+
+        if (!IsValidUsername(username)) {
+            System.out.println("Error: Invalid username.");
+            return false;
+        }
+
+        if (!IsValidPass(password)) {
+            System.out.println("Error: Invalid password.");
+            return false;
+        }
+
+        if (!IsValidEmail(email)) {
+            System.out.println("Error: Invalid email.");
+            return false;
+        }
+
+        if (!IsValidRole(role)) {
+            System.out.println("Error: Invalid role.");
+            return false;
+        }
+
+        if (!IsValidSubscriptionPlan(subscription)) {
+            System.out.println("Error: Invalid subscription plan.");
+            return false;
+        }
+
+        Client newClient = new Client(username);
+        users.add(newClient);
+        return true;
     }
 
-    public boolean updateClientDetails(String username, String newEmail, String newPassword, String newSubscription) {
+    */
+
+    public static boolean updateClientDetails(String username, String newEmail, String newPassword, String newSubscription) {
         int index = search(username);
-        if (index != -1) {
-            User user = users.get(index);
-            if (user instanceof Client)
-            {
-                Client client = (Client) user;
-                if (newEmail != null && IsValidEmail(newEmail)) {
+        if (index == -1) {
+            System.out.println("Error: Username not found.");
+            return false;
+        }
+
+        User user = users.get(index);
+        if (user instanceof Client || user.getType().equals("Client")) {
+            Client client = (Client) user;
+
+
+            if (newEmail != null) {
+                if (IsValidEmail(newEmail)) {
                     client.setEmail(newEmail);
+                } else {
+                    System.out.println("Error: Invalid email.");
+                    return false;
                 }
-                if (newPassword != null && IsValidPass(newPassword)) {
-                    client.setPassword(newPassword);
-                }
-                if (newSubscription != null && IsValidSubscriptionPlan(newSubscription)) {
-                    client.setSubscriptionPlans(newSubscription);
-                }
-                return true;
             }
+
+
+            if (newPassword != null) {
+                if (IsValidPass(newPassword)) {
+                    client.setPassword(newPassword);
+                } else {
+                    System.out.println("Error: Invalid password.");
+                    return false;
+                }
+            }
+
+
+            if (newSubscription != null) {
+                if (IsValidSubscriptionPlan(newSubscription)) {
+                    client.setSubscriptionPlans(newSubscription);
+                } else {
+                    System.out.println("Error: Invalid subscription plan.");
+                    return false;
+                }
+            }
+
+            return true;
         }
+
+        System.out.println("Error: The user is not a client.");
         return false;
     }
 
-    public boolean updateDietaryPreferences(String username, String newPreferences) {
-        int index = search(username);
-        if (index != -1) {
-            User user = users.get(index);
-            if (user instanceof Client) {
-                Client client = (Client) user;
-                client.setDietaryPreferences(newPreferences);
-                return true;
-            }
-        }
-        return false;
-    }
+
 
     public boolean IsValidUsername(String user) {
         return user.length() >= 5 && user.length() <= 15 && Character.isLetter(user.charAt(0));
@@ -139,7 +186,7 @@ public class Userlist {
 
 
 
-    public boolean IsCanBeUser(String username, String password, String email, String subscriptionPlan) {
+    public static boolean IsCanBeUser(String username, String password, String email, String subscriptionPlan) {
 
         if (!allFieldsisIsFull(username, password, email, subscriptionPlan)) {
             return false;
@@ -159,8 +206,6 @@ public class Userlist {
 
 
 
-
-
         if (!isValidSubscriptionPlan(subscriptionPlan)) {
             System.out.println("Invalid subscription plan.");
             return false;
@@ -171,11 +216,11 @@ public class Userlist {
 
 
 
-    private boolean isValidSubscriptionPlan(String subscriptionPlan) {
-        return subscriptionPlan != null && (subscriptionPlan.equals("Basic") || subscriptionPlan.equals("Premium")); // تحقق من أن الخطة إما Basic أو Premium
+    private static boolean isValidSubscriptionPlan(String subscriptionPlan) {
+        return subscriptionPlan != null && (subscriptionPlan.equals("basic")||subscriptionPlan.equals("silver") || subscriptionPlan.equals("gold")||subscriptionPlan.equals("premium")); // تحقق من أن الخطة إما Basic أو Premium
     }
 
-    public boolean allFieldsisIsFull(String field1, String field2, String field3, String field4) {
+    public static boolean allFieldsisIsFull(String field1, String field2, String field3, String field4) {
 
         if (field1 == null || field1.isEmpty()) {
             System.out.println("Field 1 is required.");
@@ -204,17 +249,20 @@ public class Userlist {
 
     }
 
-public void fillDataClientEnrollInProgram()
+public static void fillDataClientEnrollInProgram()
 {
 
+    Client C1 = new Client("Mahmoud", "moh@gmail.com", "10203040", "Client", "Gold");
+    Client C2 = new Client("Alaa", "alaa@yahoo.com", "20304050", "Client", "Silver");
+    Client C3 = new Client("Hiba", "hiba@gmail.com", "30405060", "Client", "Platinum");
+    Client C4 = new Client("Omar", "omar@hotmail.com", "40506070", "Client", "Bronze");
+    Client C5 = new Client("Sara", "sara@gmail.com", "50607080", "Client", "Diamond");
 
-        Client C1 = new Client("Mahmoud", "moh@gmail.com", "10203040", "Instructor", "Gold");
-        Client C2 = new Client("Alaa", "alaa@yahoo.com", "20304050", "Student", "Silver");
-        Client C3 = new Client("Hiba", "hiba@gmail.com", "30405060", "Teacher", "Platinum");
-        ProgramService.enrollClientInProgram(C1, "Muscle Gain Program");
-        ProgramService.enrollClientInProgram(C2, "Muscle Gain Program");
-        ProgramService.enrollClientInProgram(C3, "Muscle Gain Program");
-
+    ProgramService.enrollClientInProgram(C1, "Muscle Gain Program");
+    ProgramService.enrollClientInProgram(C2, "Weight Loss Program");
+    ProgramService.enrollClientInProgram(C3, "Flexibility Program");
+    ProgramService.enrollClientInProgram(C4, "Yoga Program");
+    ProgramService.enrollClientInProgram(C5, "Endurance Program");
     }
 
 

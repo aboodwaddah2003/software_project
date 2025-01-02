@@ -36,6 +36,8 @@ public class ManageAccountHelper {
     }
 
 
+
+
     public static int search(String username) {
         for (int i = 0; i < instructors.size(); i++) {
             Instructor instructor = instructors.get(i);
@@ -59,10 +61,10 @@ public  static  void fillRecordActivity()
 {
     if (!isActivityFilled) {
         Userlist.recordActivity("alaa22", "update profile","15-09-2024");
-        Userlist.recordActivity("alaa22", "update profile","12-09-2024");
-        Userlist.recordActivity("alaa22", "update profile","14-09-2013");
+        Userlist.recordActivity("alaa22", "add publication","12-09-2024");
+        Userlist.recordActivity("alaa22", " delete publication","14-09-2013");
         Userlist.recordActivity("waddah", "update profile","14-09-2013");
-        Userlist.recordActivity("ahmad", "update profile","14-09-2013");
+
 
         isActivityFilled = true;
     }
@@ -71,22 +73,19 @@ public  static  void fillRecordActivity()
 public static boolean isValidFormatDate(String date)  ///15-09-2024
 {
 
-if(date.length()!=10)
-    return false;
-
-for(int i=0; i<date.length();i++)
-{
-    char s=date.charAt(i);
-    if(i==2 || i==5)
-    {
-        if (s != '-' && s != '/')
-            return false;
-    }
-    else  if(!Character.isDigit(s))
+    if (date.length() != 10)
         return false;
 
+    for (int i = 0; i < date.length(); i++) {
+        char s = date.charAt(i);
+        if (i == 2 || i == 5) {
+            if (s != '-' && s != '/')
+                return false;
+        } else if (!Character.isDigit(s))
+            return false;
 
-}
+
+    }
     try {
 
         int day = Integer.parseInt(date.substring(0, 2));
@@ -117,8 +116,20 @@ for(int i=0; i<date.length();i++)
     }
 }
 
+    public  static void showAllInstructorRequest() {
+    for (Instructor user : instructors) {
+      {
+
+            if (user.getStatus().equals("pending")) {
+                System.out.println(user);
+            }
+        }
+    }
+}
 
 }
+
+
 
 
 

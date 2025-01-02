@@ -93,7 +93,7 @@ public class Admin  extends User {
         }
     }
 
-    public boolean setAccountStatus(String userName, boolean activate) {
+    public  static boolean  setAccountStatus(String userName, boolean activate) {
 
         int i = Userlist.search(userName);
         if (i == -1) {
@@ -111,7 +111,7 @@ public class Admin  extends User {
         return true;
     }
 
-    public boolean approveNewInstructor(String name) {
+    public static  boolean approveNewInstructor(String name) {
 
         int i = ManageAccountHelper.search(name);
         if (i == -1) {
@@ -126,13 +126,14 @@ public class Admin  extends User {
         if ("pending".equals(instructor.getStatus())) {
             instructor.setStatus("Approved");
             Userlist.users.add(instructor);
+            System.out.println("successful add instructor to the system");
             return true;
         }
 
         return false;
     }
 
-    public boolean ShowUserAction(String userName) {
+    public static boolean ShowUserAction(String userName) {
 
         boolean userFound = false;
 if(Userlist.search(userName)==-1)
@@ -148,7 +149,7 @@ if(Userlist.search(userName)==-1)
         return userFound;
     }
 
-    public boolean ShowDateAction(String date) {
+    public static  boolean ShowDateAction(String date) {
 
 
         if(ManageAccountHelper.isValidFormatDate(date)) {
@@ -180,7 +181,7 @@ if(Userlist.search(userName)==-1)
         return true;
     }
 
-    public double calculateTotalRevenue() {
+    public static double calculateTotalRevenue() {
         double totalRevenue = 0;
         for (Program program : ProgramService.allPrograms) {
             totalRevenue += program.getPrice() * program.numOfClientSub();
@@ -190,14 +191,13 @@ if(Userlist.search(userName)==-1)
         return totalRevenue;
     }
 
-    public void generateRevenueReport()
+    public static  void generateRevenueReport()
     {
       System.out.println("The total Revenue is "+calculateTotalRevenue());
       System.out.println("**************************************************");
       System.out.println("This is detail for revenue for each program");
-        double totalRevenue = 0;
         for (Program program : ProgramService.allPrograms) {
-System.out.println(program.getName()+"The total revenue is "+program.numOfClientSub()*program.getPrice() );
+System.out.println(program.getName()+"The total revenue is "+program.numOfClientSub()*program.getPrice()+" the number of subscriber is "+program.numOfClientSub());
         }
 
         }
@@ -232,7 +232,7 @@ System.out.println(program.getName()+"The total revenue is "+program.numOfClient
         return true;
     }
 
-public void showActivePrograms(LocalDate d) {
+public static void showActivePrograms(LocalDate d) {
 
     for (Program program : ProgramService.allPrograms) {
         if (!program.isCompleted(d))
@@ -240,7 +240,7 @@ public void showActivePrograms(LocalDate d) {
     }
 }
 
-    public void showCompletedPrograms(LocalDate d) {
+    public  static  void showCompletedPrograms(LocalDate d) {
 
         for (Program program : ProgramService.allPrograms) {
             if (program.isCompleted(d))
@@ -249,7 +249,7 @@ public void showActivePrograms(LocalDate d) {
     }
 
 
-    public boolean updateContentStatus(String title, String newStatus) {
+    public static boolean updateContentStatus(String title, String newStatus) {
         if (ContentMangerService.contentMangers.isEmpty()) {
             return false;
         }
@@ -263,6 +263,16 @@ public void showActivePrograms(LocalDate d) {
         }
 
         return found;
+    }
+
+    public static boolean resolveComplaint(int id)
+    {
+        if(id>0)
+        {
+            FeedbackService.resolveComplaint(id);
+return true;
+        }
+return false;
     }
 
 

@@ -18,11 +18,11 @@ public class ProgramController {
     public List<Program> browseProgramsByFocusArea(String focusArea) {
         return programService.filterProgramsByFocusArea(focusArea);
     }
-
+/*
     public String enrollInProgram(Client client, String programName) {
-        return programService.enrollClientInProgram(client, programName); // تسجيل العميل في البرنامج
+        return programService.enrollClientInProgram(client, programName);
     }
-
+*/
     public String viewSchedule(Program program) {
         return programService.getProgramSchedule(program.getName());
     }
