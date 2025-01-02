@@ -22,24 +22,36 @@ public class ProgramService {
         }
     }
 
-    public static void fillDataProgram()
-    {
-        Program p1= ProgramService.getProgramByName("Muscle Gain Program") ;
-        Program p2= ProgramService.getProgramByName("Weight Loss Program") ;
-        Program p3= ProgramService.getProgramByName("Flexibility Program") ;
-        Program p4= ProgramService.getProgramByName("Yoga Program") ;
+    public static void fillDataProgram() {
+        Program p1 = ProgramService.getProgramByName("Muscle Gain Program");
+        Program p2 = ProgramService.getProgramByName("Weight Loss Program");
+        Program p3 = ProgramService.getProgramByName("Flexibility Program");
+        Program p4 = ProgramService.getProgramByName("Yoga Program");
 
-
+        // Create start dates
         LocalDate startDateP1 = LocalDate.of(2024, 12, 1);
         LocalDate startDateP2 = LocalDate.of(2024, 12, 12);
         LocalDate startDateP3 = LocalDate.of(2024, 11, 1);
         LocalDate startDateP4 = LocalDate.of(2024, 11, 15);
-        p1.setStartDate(startDateP1);
-        p2.setStartDate(startDateP2);
-        p3.setStartDate(startDateP3);
-        p4.setStartDate(startDateP4);
 
+        // Null checks before setting start dates
+        if (p1 != null) {
+            p1.setStartDate(startDateP1);
+        } else {
+            // Handle the case where p1 is null (e.g., log an error, create a new Program, etc.)
+        }
 
+        if (p2 != null) {
+            p2.setStartDate(startDateP2);
+        }
+
+        if (p3 != null) {
+            p3.setStartDate(startDateP3);
+        }
+
+        if (p4 != null) {
+            p4.setStartDate(startDateP4);
+        }
     }
 
 
