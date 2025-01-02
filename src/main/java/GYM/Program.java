@@ -7,11 +7,7 @@ public class Program {
     private String difficultyLevel;
     private String focusArea;
 
-
-
     private int duration;
-
-
 
     private LocalDate startDate;
     private  double price;
