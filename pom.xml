@@ -15,6 +15,7 @@
         <sonar.host.url>https://sonarcloud.io</sonar.host.url>
         <java.version>21</java.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <jacoco.version>0.8.12</jacoco.version> <!-- Added Jacoco version property -->
     </properties>
 
     <dependencies>
@@ -61,11 +62,14 @@
 
     <build>
         <plugins>
+            <!-- Surefire Plugin to Run Tests -->
+
+
             <!-- Jacoco Plugin -->
             <plugin>
                 <groupId>org.jacoco</groupId>
                 <artifactId>jacoco-maven-plugin</artifactId>
-                <version>0.8.12</version>
+                <version>${jacoco.version}</version>
                 <executions>
                     <execution>
                         <goals>
