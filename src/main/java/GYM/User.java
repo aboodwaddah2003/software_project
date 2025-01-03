@@ -78,7 +78,7 @@ public class User {
         this.userName = userName;
     }
 
-    public String getSubscriptionPlans() {
+    public  String getSubscriptionPlans() {
         return subscriptionPlans;
     }
 

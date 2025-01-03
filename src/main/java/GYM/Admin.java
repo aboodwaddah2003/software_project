@@ -218,25 +218,25 @@ System.out.println(program.getName()+"The total revenue is "+program.numOfClient
         }
 
 
-    public boolean  countCompletedPrograms(LocalDate d)
-    {
-        int completedProgramCount=0;
-        for( Program program :ProgramService.allPrograms)
-        {
-            if(!program.isCompleted(d))
-                completedProgramCount++;
-        }
-        if ( completedProgramCount==0 )
-            return false;
-
-        return true;
-    }
+//    public boolean  countCompletedPrograms(LocalDate d)
+//    {
+//        int completedProgramCount=0;
+//        for( Program program :ProgramService.allPrograms)
+//        {
+//            if(!program.isCompleted(d))
+//                completedProgramCount++;
+//        }
+//        if ( completedProgramCount==0 )
+//            return false;
+//
+//        return true;
+//    }
 
 public static void showActivePrograms(LocalDate d) {
-
+    int count=0;
     for (Program program : ProgramService.allPrograms) {
         if (!program.isCompleted(d))
-            System.out.println(program.getName() + "is active program The start date for program is  " + program.getStartDate() + " the duration for program is " + program.getDuration());
+            System.out.println(" id program :("+program.getId() +")"+program.getName() + "is active program The start date for program is  " + program.getStartDate() + " the duration for program is " + program.getDuration());
     }
 }
 

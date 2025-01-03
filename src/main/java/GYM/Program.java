@@ -7,11 +7,13 @@ public class Program {
     private String difficultyLevel;
     private String focusArea;
 
+    private int id;
     private int duration;
 
     private LocalDate startDate;
     private  double price;
     private  int count ;
+    private static  int count1=0;
 
     public Program(String name, String difficultyLevel, String focusArea,double price,int duration) {
         this.name = name;
@@ -21,6 +23,7 @@ public class Program {
        this.price=price;
        this.duration=duration;
        this.startDate=LocalDate.now();
+       this.id=++count1;
     }
 
     public String getName() {
@@ -101,7 +104,13 @@ public class Program {
         this.duration = duration;
     }
 
+    public int getId() {
+        return id;
+    }
 
+    public void setId(int id) {
+        this.id = id;
+    }
 
 
 }

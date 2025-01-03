@@ -60,8 +60,8 @@ public class Client extends User {
     }
 
 
-    public List<Program> getEnrolledPrograms() {
-        return new ArrayList<>(enrolledPrograms); // Return a copy to maintain encapsulation
+    public  List<Program> getEnrolledPrograms() {
+        return  enrolledPrograms;
     }
 
 
@@ -112,5 +112,7 @@ public boolean submitComplaint(String details)
     }
     return false;
 }
+
+
 
 }
