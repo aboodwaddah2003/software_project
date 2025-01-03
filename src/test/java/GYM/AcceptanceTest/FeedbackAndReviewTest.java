@@ -4,7 +4,6 @@ import GYM.Feedback;
 import GYM.FeedbackService;
 import GYM.Program;
 import GYM.ProgramService;
-import GYM.ProgramController;
 import io.cucumber.datatable.DataTable;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
@@ -17,7 +16,7 @@ import java.util.List;
 
 public class FeedbackAndReviewTest {
 
-    private ProgramController programController;
+
     private FeedbackService feedbackService;
     private Program selectedProgram;
     private List<Feedback> feedbackList;
