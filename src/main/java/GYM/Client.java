@@ -20,7 +20,7 @@ public class Client extends User {
     public Client(String userName, String email, String password, String type, String subscriptionPlan) {
         super(userName, email, password, type, subscriptionPlan);
         this.enrolledPrograms = new ArrayList<>();
-        this.feedbackService = feedbackService;
+        this.feedbackService = new FeedbackService();
     }
 
 

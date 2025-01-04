@@ -12,19 +12,23 @@ public class FeedbackService implements FeedbackSubmissionService {
 
 
 
-    public static   void fillDataFeedback()
-    {
-        Client  u1=new Client("waddah", "waddah@gmail.com", "1234", "Instructor", "Prime");
-        u1.submitFeedback("Muscle Gain Program", 4, "very good", "improve the tools");
-        u1.submitFeedback("Weight Loss Program", 5, "excellent", "add more meal plans");
-        u1.submitFeedback("Flexibility Program", 3, "average", "include advanced stretches");
-        u1.submitFeedback("Yoga Program", 4, "good", "provide video instructions");
-        u1.submitFeedback("Muscle Gain Program", 3, "very good", "improve the tools");
-        u1.submitFeedback("Muscle Gain Program", 2, " good", "improve the tools");
-        u1.submitFeedback("Muscle Gain Program", 1, " good", "improve the tools");
-        u1.submitFeedback("Muscle Gain Program", 4, "very good", "improve the tools");
-    }
+    public static void fillDataFeedback() {
+        final String MUSCLE_GAIN_PROGRAM = "Muscle Gain Program";
+        final String WEIGHT_LOSS_PROGRAM = "Weight Loss Program";
+        final String FLEXIBILITY_PROGRAM = "Flexibility Program";
+        final String YOGA_PROGRAM = "Yoga Program";
 
+        Client u1 = new Client("waddah", "waddah@gmail.com", "1234", "Instructor", "Prime");
+
+
+        u1.submitFeedback(MUSCLE_GAIN_PROGRAM, 4, " good", "improve the tools");
+        u1.submitFeedback(WEIGHT_LOSS_PROGRAM, 5, "excellent", "add more meal plans");
+        u1.submitFeedback(FLEXIBILITY_PROGRAM, 3, "average", "include advanced stretches");
+        u1.submitFeedback(YOGA_PROGRAM, 4, "good", "provide video instructions");
+        u1.submitFeedback(MUSCLE_GAIN_PROGRAM, 3, "very good", "improve the tools");
+        u1.submitFeedback(MUSCLE_GAIN_PROGRAM, 2, " very good", "improve the tools1");
+        u1.submitFeedback(MUSCLE_GAIN_PROGRAM, 4, "very good", "improve the tools3");
+    }
 
 
 
