@@ -17,21 +17,8 @@ public class ContentManger  {
 
 
     }
-
     public String getTitle() {
         return Title;
-    }
-
-    public void setTitle(String title) {
-        Title = title;
-    }
-
-    public String getAuthor() {
-        return Author;
-    }
-
-    public void setAuthor(String author) {
-        Author = author;
     }
 
     public String getStatus() {
@@ -42,17 +29,6 @@ public class ContentManger  {
         Status = status;
     }
 
-    public String getSubmissionDate() {
-        return SubmissionDate;
-    }
-
-    public void setSubmissionDate(String submissionDate) {
-        SubmissionDate = submissionDate;
-    }
-
-    public String getContent() {
-        return Content;
-    }
 
     public void setContent(String content) {
         Content = content;

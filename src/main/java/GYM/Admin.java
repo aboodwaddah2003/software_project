@@ -70,27 +70,48 @@ public class Admin  extends User {
 
     public boolean updateData(String name, String email, String pass, String type, String subPlan) {
         int i = Userlist.search(name);
-        if (i == -1)
+        if (i == -1) {
             return false;
-        else {
-            User user = Userlist.users.get(i);
-            if (email != null && !email.isEmpty() && Userlist.IsValidEmail(email)) {
-                if (Userlist.searchEmail(email) != -1)
-                    return false;
-                user.setEmail(email);
-            }
-            if (subPlan != null && !subPlan.isEmpty()) {
-                user.setSubscriptionPlans(subPlan);
-            }
-
-            if (type != null && !type.isEmpty() && Userlist.IsValidRole(type)) {
-                user.setType(type);
-            }
-            if (pass != null && !pass.isEmpty() && Userlist.IsValidPass(pass)) {
-                user.setPassword(pass);
-            }
-            return true;
         }
+
+        User user = Userlist.users.get(i);
+
+        if (isEmailUpdatable(email)) {
+            if (Userlist.searchEmail(email) != -1) {
+                return false;
+            }
+            user.setEmail(email);
+        }
+
+        if (isNonEmpty(subPlan)) {
+            user.setSubscriptionPlans(subPlan);
+        }
+
+        if (isValidType(type)) {
+            user.setType(type);
+        }
+
+        if (isValidPassword(pass)) {
+            user.setPassword(pass);
+        }
+
+        return true;
+    }
+
+    private boolean isEmailUpdatable(String email) {
+        return email != null && !email.isEmpty() && Userlist.IsValidEmail(email);
+    }
+
+    private boolean isNonEmpty(String input) {
+        return input != null && !input.isEmpty();
+    }
+
+    private boolean isValidType(String type) {
+        return isNonEmpty(type) && Userlist.IsValidRole(type);
+    }
+
+    private boolean isValidPassword(String pass) {
+        return isNonEmpty(pass) && Userlist.IsValidPass(pass);
     }
 
     public  static boolean  setAccountStatus(String userName, boolean activate) {

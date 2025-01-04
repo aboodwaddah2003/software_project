@@ -10,7 +10,7 @@ public class Client extends User {
     private List<Program> enrolledPrograms;
 
     public static ArrayList<Milestone> milestones= new ArrayList<>();
-
+    private FeedbackSubmissionService feedbackService;
     public Client(String userName) {
         super(userName, "default_email@example.com", "default_password", "Client", "Basic");
         this.enrolledPrograms = new ArrayList<>();
@@ -20,6 +20,7 @@ public class Client extends User {
     public Client(String userName, String email, String password, String type, String subscriptionPlan) {
         super(userName, email, password, type, subscriptionPlan);
         this.enrolledPrograms = new ArrayList<>();
+        this.feedbackService = feedbackService;
     }
 
 
@@ -87,15 +88,13 @@ public class Client extends User {
         return  false;
     }
 
-    public boolean submitComplaint(String details)
-    {
-        if(!details.isEmpty() && details!=null) {
-            FeedbackService.submitComplaint(this,details);
-            return  true;
+    public boolean submitComplaint(String details) {
+        if (details != null && !details.isEmpty()) {
+            FeedbackSubmissionService.submitComplaint(this, details);
+            return true;
         }
         return false;
     }
-
 
     public static void addMilestone( String weight, String bmi, String attendance,String clientName){
         Milestone milestone = new Milestone(weight, bmi, attendance,clientName);

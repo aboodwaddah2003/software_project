@@ -6,7 +6,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class FeedbackService {
+public class FeedbackService implements FeedbackSubmissionService {
     public static List<Feedback> feedbackList = new ArrayList<>();
     public static List<Complaint> complaints = new ArrayList<>();
 
@@ -24,15 +24,7 @@ public class FeedbackService {
         u1.submitFeedback("Muscle Gain Program", 1, " good", "improve the tools");
         u1.submitFeedback("Muscle Gain Program", 4, "very good", "improve the tools");
     }
-    public static   void fillDataComplements()
-    {
-        Client  u1=new Client("waddah", "waddah@gmail.com", "1234", "Instructor", "Prime");
-        u1.submitComplaint("The gym equipment is outdated and needs maintenance.");
-        u1.submitComplaint("The air conditioning in the gym is not working properly.");
-        u1.submitComplaint("The gym's opening hours are not convenient for my schedule.");
-        u1.submitComplaint("There is not enough space for stretching and yoga activities.");
-        u1.submitComplaint("The gym is overcrowded during peak hours, making it difficult to use machines.");
-    }
+
 
 
 
@@ -59,12 +51,10 @@ public class FeedbackService {
         return programsWithFeedback;
     }
 
-    public static void submitComplaint(Client client ,String details) {
-
-        Complaint complaint = new Complaint(client.getUserName(),details);
-       complaints.add(complaint);
+    public static void submitComplaint(Client client, String details) {
+        Complaint complaint = new Complaint(client.getUserName(), details);
+        complaints.add(complaint);
     }
-
 
     public static void submitFeedback(Feedback feedback) {
         feedbackList.add(feedback);
