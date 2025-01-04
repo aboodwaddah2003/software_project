@@ -4,12 +4,17 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
+import java.util.Scanner;
 
 public class ProgramService {
     public static List<Program> allPrograms = new ArrayList<>();
     public static List<Client> registeredClients = new ArrayList<>();
 
     public static List<String>AttendanceRecord = new ArrayList<>();
+
+
+
+
 
 
     public ProgramService() {
@@ -125,5 +130,9 @@ public class ProgramService {
             return "Program '" + programName + "' not found.";
         }
     }
+
+
+
+
 
 }

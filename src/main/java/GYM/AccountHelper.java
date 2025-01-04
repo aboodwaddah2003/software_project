@@ -8,6 +8,7 @@ class ClientRepository {
 
     private List<Client> clients;
 
+    //constructor
     public ClientRepository(List<Client> clients) {
         this.clients = clients;
     }
@@ -28,7 +29,7 @@ class ClientRepository {
     }
 }
 
-
+//the base class
 public class AccountHelper {
 
     private ClientRepository clientRepository;
