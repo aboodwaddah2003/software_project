@@ -8,9 +8,7 @@ import java.util.Map;
 
 public class FeedbackService implements FeedbackSubmissionService {
     public static List<Feedback> feedbackList = new ArrayList<>();
-    public static List<Complaint> complaints = new ArrayList<>();
-
-
+    public static List<Complaint> complaints = new ArrayList<Complaint>();
 
     public static void fillDataFeedback() {
         final String MUSCLE_GAIN_PROGRAM = "Muscle Gain Program";

@@ -1,7 +1,10 @@
 package GYM;
 
 public interface FeedbackSubmissionService {
-    static void submitComplaint(Client client, String details) {
-
+    static void submitComplaint(Client client, String details)
+    {
+        FeedbackService.submitComplaint(client,details);
     }
+
+
 }

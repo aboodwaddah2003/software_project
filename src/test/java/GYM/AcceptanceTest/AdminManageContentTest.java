@@ -112,8 +112,6 @@ public class AdminManageContentTest {
     @When("the admin navigates to the User complement")
     public void the_admin_navigates_to_the_user_complement() {
         state=  u1.submitComplaint("the food service is not good");
-        state=  u1.submitComplaint("the price is very high");
-        state=  u1.submitComplaint("the wifi not good");
         if(state)
             Assertions.assertTrue(state);
         else

@@ -51,23 +51,22 @@ public class ProgramManagementPage {
     }
 
     private boolean ProgramIsEmpty(Program p) {
-        if (p.getDifficultyLevel().isEmpty()) {
-            System.out.println("Program difficulty level cannot be empty");
-            return true;
-        } else if (p.getPrice()==0) {
-            System.out.println("Program focus area cannot be empty or zero");
-            return true;
-        } else if (p.getDuration()==0) {
-            System.out.println("Program duration cannot be empty or zero");
-            return true;
-        } else if (p.getGoals().isEmpty()) {
-            System.out.println("Program goals cannot be empty");
-            return true;
-        } else if (p.getSchedules().isEmpty()) {
-            System.out.println("Program schedules cannot be empty");
-            return true;
-        } else if (p.getImgPath().isEmpty()) {
-            System.out.println("Program image path cannot be empty");
+        try {
+            if (p.getDifficultyLevel().isEmpty()) {
+                throw new IllegalArgumentException("Program difficulty level cannot be empty");
+            } else if (p.getPrice() == 0) {
+                throw new IllegalArgumentException("Program price cannot be zero");
+            } else if (p.getDuration() == 0) {
+                throw new IllegalArgumentException("Program duration cannot be zero");
+            } else if (p.getGoals().isEmpty()) {
+                throw new IllegalArgumentException("Program goals cannot be empty");
+            } else if (p.getSchedules().isEmpty()) {
+                throw new IllegalArgumentException("Program schedules cannot be empty");
+            } else if (p.getImgPath().isEmpty()) {
+                throw new IllegalArgumentException("Program image path cannot be empty");
+            }
+        } catch (IllegalArgumentException e) {
+            System.err.println(e.getMessage());
             return true;
         }
         return false;
