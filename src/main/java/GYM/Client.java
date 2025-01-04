@@ -9,6 +9,8 @@ public class Client extends User {
     private String dietaryPreferences;
     private List<Program> enrolledPrograms;
 
+    public static ArrayList<Milestone> milestones= new ArrayList<>();
+
     public Client(String userName) {
         super(userName, "default_email@example.com", "default_password", "Client", "Basic");
         this.enrolledPrograms = new ArrayList<>();
@@ -93,26 +95,65 @@ public class Client extends User {
         ContentMangerService.contentMangers.add(contentManager1);
     }
 
-public boolean submitFeedback(String program, int rating, String review, String improvementSuggestions)
-{
-    Program program1=ProgramService.getProgramByName(program);
-    if(program1 !=null) {
-        Feedback feedback = new Feedback(program1, rating, review, improvementSuggestions);
-        FeedbackService.submitFeedback(feedback);
-        return true;
+    public boolean submitFeedback(String program, int rating, String review, String improvementSuggestions)
+    {
+        Program program1=ProgramService.getProgramByName(program);
+        if(program1 !=null) {
+            Feedback feedback = new Feedback(program1, rating, review, improvementSuggestions);
+            FeedbackService.submitFeedback(feedback);
+            return true;
+        }
+        return  false;
     }
-    return  false;
-}
 
-public boolean submitComplaint(String details)
-{
-    if(!details.isEmpty() && details!=null) {
-       FeedbackService.submitComplaint(this,details);
-        return  true;
+    public boolean submitComplaint(String details)
+    {
+        if(!details.isEmpty() && details!=null) {
+            FeedbackService.submitComplaint(this,details);
+            return  true;
+        }
+        return false;
     }
-    return false;
-}
 
+
+    public static void addMilestone( String weight, String bmi, String attendance,String clientName){
+        Milestone milestone = new Milestone(weight, bmi, attendance,clientName);
+        milestones.add(milestone);
+        System.out.println("Milestone added: " + milestone);
+
+
+    }
+
+    public static void displayMilestones() {
+        if (milestones.isEmpty()) {
+            System.out.println("No milestones available.");
+        } else {
+            System.out.println("All Milestones:");
+            for (Milestone milestone : milestones) {
+                System.out.println(milestone);
+            }
+        }
+    }
+
+    public static boolean searchClient(String name) {
+        for (Milestone milestone : milestones) {
+            if (name==milestone.getClientName())
+                return true;
+        }
+        return false;
+    }
+
+    public static void printMilestoneByName(String name){
+        for (Milestone milestone : milestones) {
+            if (name==milestone.getClientName()){
+                System.out.println(milestone.toString());
+                return;
+            }
+
+        }
+
+
+    }
 
 
 }

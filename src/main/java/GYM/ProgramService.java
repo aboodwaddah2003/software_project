@@ -4,8 +4,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
+
 public class ProgramService {
     public static List<Program> allPrograms = new ArrayList<>();
     public static List<Client> registeredClients = new ArrayList<>();
@@ -23,36 +22,24 @@ public class ProgramService {
         }
     }
 
-    public static void fillDataProgram() {
-        Program p1 = ProgramService.getProgramByName("Muscle Gain Program");
-        Program p2 = ProgramService.getProgramByName("Weight Loss Program");
-        Program p3 = ProgramService.getProgramByName("Flexibility Program");
-        Program p4 = ProgramService.getProgramByName("Yoga Program");
+    public static void fillDataProgram()
+    {
+        Program p1= ProgramService.getProgramByName("Muscle Gain Program") ;
+        Program p2= ProgramService.getProgramByName("Weight Loss Program") ;
+        Program p3= ProgramService.getProgramByName("Flexibility Program") ;
+        Program p4= ProgramService.getProgramByName("Yoga Program") ;
 
 
         LocalDate startDateP1 = LocalDate.of(2024, 12, 1);
         LocalDate startDateP2 = LocalDate.of(2024, 12, 12);
         LocalDate startDateP3 = LocalDate.of(2024, 11, 1);
         LocalDate startDateP4 = LocalDate.of(2024, 11, 15);
+        p1.setStartDate(startDateP1);
+        p2.setStartDate(startDateP2);
+        p3.setStartDate(startDateP3);
+        p4.setStartDate(startDateP4);
 
 
-        if (p1 != null) {
-            p1.setStartDate(startDateP1);
-        } else {
-
-        }
-
-        if (p2 != null) {
-            p2.setStartDate(startDateP2);
-        }
-
-        if (p3 != null) {
-            p3.setStartDate(startDateP3);
-        }
-
-        if (p4 != null) {
-            p4.setStartDate(startDateP4);
-        }
     }
 
 
@@ -65,7 +52,6 @@ public class ProgramService {
         }
         return filteredPrograms;
     }
-
 
 
     public List<Program> filterProgramsByFocusArea(String focusArea) {
@@ -103,14 +89,6 @@ public class ProgramService {
     }
 
 
-    public static String getProgramSchedule(String programName) {
-        Program program = getProgramByName(programName);
-        if (program != null) {
-            return "Schedule for " + program.getName() + ": Monday 10AM, Wednesday 10AM, Friday 10AM";
-        } else {
-            return "Program '" + programName + "' not found.";
-        }
-    }
 
 
     public static Program getProgramByName(String programName) {
@@ -123,13 +101,29 @@ public class ProgramService {
     }
 
 
+    public void addClient(Client client) {
+        if (!registeredClients.contains(client)) {
+            registeredClients.add(client);
+        }
+    }
 
+
+    public List<Client> getRegisteredClients() {
+        return registeredClients;
+    }
 
 
     public static List<Program> getAllPrograms() {
         return allPrograms;
     }
 
-
+    public static String getProgramSchedule(String programName) {
+        Program program = getProgramByName(programName);
+        if (program != null) {
+            return "Schedule for " + program.getName() + ": Monday 10AM, Wednesday 10AM, Friday 10AM";
+        } else {
+            return "Program '" + programName + "' not found.";
+        }
+    }
 
 }

@@ -19,10 +19,10 @@ public class AdminManageContentTest {
     @Given("the admin navigates to the Pending Submissions section")
     public void the_admin_navigates_to_the_pending_submissions_section() {
 
-    contentManger=new ContentMangerService();
-     c1=new Instructor("mahmoud", "moh@gmail.com", "10203040", "Instructor", "");
-      programService=new ProgramService();
-      feedbackService.fillDataFeedback();
+        contentManger=new ContentMangerService();
+        c1=new Instructor("mahmoud", "moh@gmail.com", "10203040", "Instructor", "");
+        programService=new ProgramService();
+        feedbackService.fillDataFeedback();
     }
     @When("the admin selects a wellness submitted by an instructor")
     public void the_admin_selects_a_wellness_submitted_by_an_instructor()
@@ -37,11 +37,11 @@ public class AdminManageContentTest {
     @When("select the {string} form the wellness that want to approved")
     public void select_the_form_the_wellness_that_want_to_approved(String string)
     {
-     state=A1.updateContentStatus(string,"approve");
-     if(state)
-         Assertions.assertTrue(state);
-     else
-         Assertions.fail("No content");
+        state=A1.updateContentStatus(string,"approve");
+        if(state)
+            Assertions.assertTrue(state);
+        else
+            Assertions.fail("No content");
     }
 
     @When("select the {string} form the wellness that want to rejected")
@@ -70,7 +70,7 @@ public class AdminManageContentTest {
     @Then("the system updates the article status to Approved")
     public void the_system_updates_the_article_status_to_approved() {
         System.out.println("this is approved contents");
-  contentManger.showApprovedContent();
+        contentManger.showApprovedContent();
     }
 
     @Then("the system updates the article status to rejected")
@@ -98,15 +98,15 @@ public class AdminManageContentTest {
 
     @When("the admin navigates to the User Feedback")
     public void the_admin_navigates_to_the_user_feedback() {
-      state=  u1.submitFeedback("Muscle Gain Program", 4, "very good", "improve the tools");
-      if(state)
-          Assertions.assertTrue(state);
-      else
-          Assertions.fail("dvdv");
+        state=  u1.submitFeedback("Muscle Gain Program", 4, "very good", "improve the tools");
+        if(state)
+            Assertions.assertTrue(state);
+        else
+            Assertions.fail("dvdv");
     }
     @Then("reviews the details of the feedback")
     public void reviews_the_details_of_the_feedback() {
-     feedbackService.displayAllFeedbacks();
+        feedbackService.displayAllFeedbacks();
     }
 
     @When("the admin navigates to the User complement")
@@ -121,12 +121,12 @@ public class AdminManageContentTest {
     }
     @Then("reviews the details of the complement")
     public void reviews_the_details_of_the_complement() {
-      feedbackService.displayAllComplaints();
+        feedbackService.displayAllComplaints();
     }
 
     @Then("the admin reviews the details of each complaint and resolves it by updating its status to Resolved")
     public void the_admin_reviews_the_details_of_each_complaint_and_resolves_it_by_updating_its_status_to_resolved() {
-A1.resolveComplaint(1);
+        A1.resolveComplaint(1);
     }
 
 }

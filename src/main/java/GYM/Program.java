@@ -6,14 +6,16 @@ public class Program {
     private String name;
     private String difficultyLevel;
     private String focusArea;
-
     private int id;
+    private String goals;
+    private String imgPath;
+    private String Scheduels;
+
     private int duration;
 
     private LocalDate startDate;
     private  double price;
     private  int count ;
-    private static  int count1=0;
 
     public Program(String name, String difficultyLevel, String focusArea,double price,int duration) {
         this.name = name;
@@ -23,8 +25,35 @@ public class Program {
        this.price=price;
        this.duration=duration;
        this.startDate=LocalDate.now();
-       this.id=++count1;
     }
+
+    public Program(String name, String difficultyLevel, double price,
+                   int duration, String goals, String Scheduels, String imgPath)
+    {
+        this.name = name;
+        this.difficultyLevel = difficultyLevel;
+        this.price=price;
+        this.duration=duration;
+        this.goals=goals;
+        this.Scheduels = Scheduels;
+        this.imgPath=imgPath;
+    }
+
+
+    //default constructor
+    public Program() {
+        this.name = "";
+        this.difficultyLevel = "";
+        this.price=0;
+        this.duration=0;
+        this.goals="";
+        this.Scheduels ="";
+        this.imgPath="";
+    }
+
+
+
+
 
     public String getName() {
         return name;
@@ -40,17 +69,11 @@ public class Program {
 
     @Override
     public boolean equals(Object obj) {
-        if (this == obj) return true; // Same object comparison
-        if (obj == null || getClass() != obj.getClass()) return false; // Null or different class
-        Program program = (Program) obj; // Cast to the correct type
-        return name.equals(program.name); // Compare relevant fields
+        if (this == obj) return true;
+        if (obj == null || getClass() != obj.getClass()) return false;
+        Program program = (Program) obj;
+        return name.equals(program.name);
     }
-
-    @Override
-    public int hashCode() {
-        return name.hashCode(); // Ensure consistency with equals()
-    }
-
 
 
 
@@ -86,7 +109,7 @@ public class Program {
     }
 
     public boolean isCompleted(LocalDate fakeToday) {
-
+        startDate=fakeToday;
         LocalDate endDate = startDate.plusWeeks(duration);
 
         return fakeToday.isAfter(endDate);
@@ -104,6 +127,33 @@ public class Program {
         this.duration = duration;
     }
 
+
+    public String getGoals() {
+
+        return goals;
+    }
+
+    public void setGoals(String goals) {
+        this.goals = goals;
+    }
+
+    public String getSchedules() {
+        return Scheduels;
+    }
+
+    public void setSchedules(String schedules) {
+        this.Scheduels = schedules;
+    }
+
+    public String getImgPath() {
+        return imgPath;
+    }
+
+    public void setImgPath(String imgPath) {
+        this.imgPath = imgPath;
+    }
+
+
     public int getId() {
         return id;
     }
@@ -111,6 +161,4 @@ public class Program {
     public void setId(int id) {
         this.id = id;
     }
-
-
 }

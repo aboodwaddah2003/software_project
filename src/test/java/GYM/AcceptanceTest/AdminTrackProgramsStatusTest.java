@@ -21,7 +21,7 @@ public class AdminTrackProgramsStatusTest {
         P=new ProgramService();
         P.fillDataProgram();
 
-localDate=LocalDate.of(2025,1,15);
+        localDate=LocalDate.of(2025,1,15);
     }
 
     @When("the admin navigates to the Programs section")
@@ -47,7 +47,7 @@ localDate=LocalDate.of(2025,1,15);
 
     @When("the admin selects Completed Programs")
     public void the_admin_selects_completed_programs() {
-       state=A1.countActivePrograms(localDate);
+        state=A1.countActivePrograms(localDate);
         if (state) {
             Assertions.assertTrue(state);
         } else {
@@ -57,6 +57,6 @@ localDate=LocalDate.of(2025,1,15);
     }
     @Then("the system displays a list of all completed programs")
     public void the_system_displays_a_list_of_all_completed_programs() {
-      A1.showCompletedPrograms(localDate);
+        A1.showCompletedPrograms(localDate);
     }
 }

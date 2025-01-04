@@ -4,12 +4,21 @@ public class Milestone {
     private String weight;
     private String bmi;
     private String attendance;
+    private String clientName;
+
 
     public Milestone(String weight, String bmi, String attendance) {
         this.weight = weight;
         this.bmi = bmi;
         this.attendance = attendance;
     }
+    public Milestone(String weight, String bmi, String attendance, String clientName) {
+        this.weight = weight;
+        this.bmi = bmi;
+        this.attendance = attendance;
+        this.clientName = clientName;
+    }
+
 
     public String getWeight() {
         return weight;
@@ -21,6 +30,19 @@ public class Milestone {
 
     public String getAttendance() {
         return attendance;
+    }
+
+    public String getClientName() {return clientName;}
+    public void setClientName(String clientName) {
+        this.clientName = clientName;
+    }
+
+    @Override
+    public String toString() {
+        return "Client: " + clientName +
+                "\nMilestone: " + weight +
+                "\nDescription: " + bmi +
+                "\nDue Date: " + attendance;
     }
 
     public void setWeight(String newWeight) {

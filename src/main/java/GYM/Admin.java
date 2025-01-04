@@ -14,14 +14,14 @@ import static GYM.Userlist.ActivityRecords;
 
 public class Admin  extends User {
 
-///
+    ///
     public Admin(String userName, String email, String password, String type, String subscriptionPlans) {
         super(userName, email, password, type, subscriptionPlans);
 
     }
 
     public boolean addAccountClient(String name, String email, String pass, String type, String sub) {
-       Client newClient = new Client(name, email, pass, type, sub);
+        Client newClient = new Client(name, email, pass, type, sub);
         if (Userlist.search(newClient.getUserName()) == -1) {
             Userlist.users.add(newClient);
             return true;
@@ -39,7 +39,7 @@ public class Admin  extends User {
     }
 
     public boolean checkAllInput(String name, String email, String pass, String type,String sub) {
-       Userlist u = new Userlist();
+        Userlist u = new Userlist();
         if(Userlist.search(name)==-1)
         {
             if(u.IsValidUsername(name) &&u.IsValidPass(pass)&&u.IsValidEmail(email)&&u.IsValidRole(type)&&u.IsValidSubscriptionPlan(sub))
@@ -120,8 +120,8 @@ public class Admin  extends User {
 
         Instructor instructor = ManageAccountHelper.instructors.get(i);
 
-     if(Userlist.search(name) != -1)
-         return false;
+        if(Userlist.search(name) != -1)
+            return false;
 
         if ("pending".equals(instructor.getStatus())) {
             instructor.setStatus("Approved");
@@ -136,8 +136,8 @@ public class Admin  extends User {
     public static boolean ShowUserAction(String userName) {
 
         boolean userFound = false;
-if(Userlist.search(userName)==-1)
-    return false;
+        if(Userlist.search(userName)==-1)
+            return false;
 
         for (String record : ActivityRecords) {
             if (record.contains(userName)) {
@@ -193,52 +193,38 @@ if(Userlist.search(userName)==-1)
 
     public static  void generateRevenueReport()
     {
-      System.out.println("The total Revenue is "+calculateTotalRevenue());
-      System.out.println("**************************************************");
-      System.out.println("This is detail for revenue for each program");
+        System.out.println("The total Revenue is "+calculateTotalRevenue());
+        System.out.println("************************************************");
+        System.out.println("This is detail for revenue for each program");
         for (Program program : ProgramService.allPrograms) {
-System.out.println(program.getName()+"The total revenue is "+program.numOfClientSub()*program.getPrice()+" the number of subscriber is "+program.numOfClientSub());
+            System.out.println(program.getName()+"The total revenue is "+program.numOfClientSub()*program.getPrice()+" the number of subscriber is "+program.numOfClientSub());
         }
 
-        }
-
-
-        public boolean  countActivePrograms(LocalDate d)
-        {
-            int activeProgramCount=0;
-           for( Program program :ProgramService.allPrograms)
-           {
-             if(!program.isCompleted(d))
-                 activeProgramCount++;
-           }
-           if (activeProgramCount==0 )
-                return false;
-
-           return true;
-        }
-
-
-//    public boolean  countCompletedPrograms(LocalDate d)
-//    {
-//        int completedProgramCount=0;
-//        for( Program program :ProgramService.allPrograms)
-//        {
-//            if(!program.isCompleted(d))
-//                completedProgramCount++;
-//        }
-//        if ( completedProgramCount==0 )
-//            return false;
-//
-//        return true;
-//    }
-
-public static void showActivePrograms(LocalDate d) {
-    int count=0;
-    for (Program program : ProgramService.allPrograms) {
-        if (!program.isCompleted(d))
-            System.out.println(" id program :("+program.getId() +")"+program.getName() + "is active program The start date for program is  " + program.getStartDate() + " the duration for program is " + program.getDuration());
     }
-}
+
+
+    public boolean  countActivePrograms(LocalDate d)
+    {
+        int activeProgramCount=0;
+        for( Program program :ProgramService.allPrograms)
+        {
+            if(!program.isCompleted(d))
+                activeProgramCount++;
+        }
+        if (activeProgramCount==0 )
+            return false;
+
+        return true;
+    }
+
+
+    public static void showActivePrograms(LocalDate d) {
+        int count=0;
+        for (Program program : ProgramService.allPrograms) {
+            if (!program.isCompleted(d))
+                System.out.println(" id program 🙁"+program.getId() +")"+program.getName() + "is active program The start date for program is  " + program.getStartDate() + " the duration for program is " + program.getDuration());
+        }
+    }
 
     public  static  void showCompletedPrograms(LocalDate d) {
 
@@ -270,13 +256,10 @@ public static void showActivePrograms(LocalDate d) {
         if(id>0)
         {
             FeedbackService.resolveComplaint(id);
-return true;
+            return true;
         }
-return false;
+        return false;
     }
 
 
-    }
-
-
-
+}
