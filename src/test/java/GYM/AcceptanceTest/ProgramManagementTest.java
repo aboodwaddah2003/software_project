@@ -138,7 +138,7 @@ public class ProgramManagementTest {
     //////////////////////////////////////////////////////////////////////////////////
     @Given("the instructor tries to delete a program assigned to active gym members")
     public void the_instructor_tries_to_delete_a_program_assigned_to_active_gym_members() {
-        P1.ActiveProgram(P2);
+
     }
 
     @When("the instructor click the {string} button6")

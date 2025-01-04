@@ -7,8 +7,6 @@ import java.util.Objects;
 public class ProgramManagementPage {
 
 
-    private Message m1;
-
     public void CreateNewProgram(Program p){
         if (p.getName().isEmpty()){
             System.out.println("Program name cannot be empty");
@@ -17,7 +15,6 @@ public class ProgramManagementPage {
         ProgramService.allPrograms.add(p);
         System.out.println("Program added");
     }
-
 
 //the name of the program can't be updated .
     public void UpdateProgram(Program p) {
@@ -35,8 +32,6 @@ public class ProgramManagementPage {
         }
         System.out.println("Program does not exist(you can't update the Name)");
     }
-
-
 
     public void Delete(Program p, LocalDate LD) {
         for (int i = 0; i < ProgramService.allPrograms.size(); i++) {
@@ -78,9 +73,6 @@ public class ProgramManagementPage {
         return false;
     }
 
-    public void ActiveProgram(Program p2) {
-
-    }
 
 }
 
