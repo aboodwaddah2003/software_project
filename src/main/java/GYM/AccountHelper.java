@@ -35,9 +35,7 @@ public class AccountHelper {
     private ClientRepository clientRepository;
 
 
-    public AccountHelper(ClientRepository clientRepository) {
-        this.clientRepository = clientRepository;
-    }
+
 
 
     public AccountHelper() {
@@ -101,32 +99,8 @@ public class AccountHelper {
     }
 
 
-    public boolean allFieldsAreFull(String age, String goals) {
-        if (age == null || age.isEmpty()) {
-            System.out.println("Age is required.");
-            return false;
-        }
-        if (goals == null || goals.isEmpty()) {
-            System.out.println("Goals are required.");
-            return false;
-        }
-        return true;
-    }
 
 
-    public boolean updatePersonalDetails(String userName, String name, int age, String goals) {
-        Client client = clientRepository.findClientByUserName(userName);
 
-        if (client == null) {
-            System.out.println("Client with username " + userName + " not found.");
-            return false;
-        }
 
-        if (name != null && !name.isEmpty()) client.setUserName(name);
-        if (age > 0) client.setAge(age);
-        if (goals != null && !goals.isEmpty()) client.setFitnessGoals(goals);
-
-        System.out.println("Personal details updated for " + userName + ": " + name + ", " + age + ", " + goals);
-        return true;
-    }
 }
