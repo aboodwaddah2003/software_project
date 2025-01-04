@@ -67,26 +67,7 @@ public class Client extends User {
     }
 
 
-    public void viewSchedule(Program program) {
-        if (isEnrolledInProgram(program)) {
-            System.out.println("Displaying schedule for: " + program.getName());
-            System.out.println("Schedule: Monday 10AM, Wednesday 10AM, Friday 10AM"); // Example schedule
-        } else {
-            System.out.println("Client is not enrolled in this program.");
-        }
-    }
 
-
-    public void displayEnrolledPrograms() {
-        if (enrolledPrograms.isEmpty()) {
-            System.out.println("Client is not enrolled in any programs.");
-        } else {
-            System.out.println("Enrolled programs:");
-            for (Program program : enrolledPrograms) {
-                System.out.println("- " + program.getName());
-            }
-        }
-    }
 
     public void addContent(String Title,String Author,String Status,String SubmissionDate,String content )
     {

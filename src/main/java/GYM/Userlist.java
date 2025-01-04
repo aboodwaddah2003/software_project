@@ -68,96 +68,9 @@ public class Userlist {
         return -1;
     }
 
-   /* public boolean createClient(String username, String password, String email, String role, String subscription) {
-        if (search(username) != -1) {
-            System.out.println("Error: Username already exists.");
-            return false;
-        }
-
-        if (searchEmail(email) != -1) {
-            System.out.println("Error: Email already exists.");
-            return false;
-        }
-
-        if (!IsValidUsername(username)) {
-            System.out.println("Error: Invalid username.");
-            return false;
-        }
-
-        if (!IsValidPass(password)) {
-            System.out.println("Error: Invalid password.");
-            return false;
-        }
-
-        if (!IsValidEmail(email)) {
-            System.out.println("Error: Invalid email.");
-            return false;
-        }
-
-        if (!IsValidRole(role)) {
-            System.out.println("Error: Invalid role.");
-            return false;
-        }
-
-        if (!IsValidSubscriptionPlan(subscription)) {
-            System.out.println("Error: Invalid subscription plan.");
-            return false;
-        }
-
-        Client newClient = new Client(username);
-        users.add(newClient);
-        return true;
-    }
-
-    */
-
-    public static boolean updateClientDetails(String username, String newEmail, String newPassword, String newSubscription) {
-        int index = search(username);
-        if (index == -1) {
-            System.out.println("Error: Username not found.");
-            return false;
-        }
-
-        User user = users.get(index);
-        if (user instanceof Client || user.getType().equals("Client")) {
-            Client client = (Client) user;
 
 
-            if (newEmail != null) {
-                if (IsValidEmail(newEmail)) {
-                    client.setEmail(newEmail);
-                } else {
-                    System.out.println("Error: Invalid email.");
-                    return false;
-                }
-            }
 
-
-            if (newPassword != null) {
-                if (IsValidPass(newPassword)) {
-                    client.setPassword(newPassword);
-                } else {
-                    System.out.println("Error: Invalid password.");
-                    return false;
-                }
-            }
-
-
-            if (newSubscription != null) {
-                if (IsValidSubscriptionPlan(newSubscription)) {
-                    client.setSubscriptionPlans(newSubscription);
-                } else {
-                    System.out.println("Error: Invalid subscription plan.");
-                    return false;
-                }
-            }
-
-            return true;
-        }
-
-        System.out.println("Error: The user is not a client.");
-        return false;
-    }
 
 
 
