@@ -69,10 +69,15 @@ public class Program {
 
     @Override
     public boolean equals(Object obj) {
-        if (this == obj) return true;
-        if (obj == null || getClass() != obj.getClass()) return false;
+        if (this == obj) return true; // Check for reference equality
+        if (obj == null || getClass() != obj.getClass()) return false; // Check for null and class type
         Program program = (Program) obj;
-        return name.equals(program.name);
+        return name.equals(program.name); // Compare the 'name' field for equality
+    }
+
+    @Override
+    public int hashCode() {
+        return name.hashCode(); // Generate a hash code based on the 'name' field
     }
 
 
