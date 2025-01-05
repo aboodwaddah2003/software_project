@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 
+import static GYM.Client.enrolledPrograms;
 import static GYM.Userlist.ActivityRecords;
 
 public class Admin  extends User {
@@ -223,6 +224,26 @@ public class Admin  extends User {
 
     }
 
+    public void printAttendancePercentageForPrograms() {
+        for (Program program : enrolledPrograms) {
+            double attendancePercentage = program.calculateAttendancePercentage();
+            System.out.println("Attendance Percentage for " + program.getName() + ": " + attendancePercentage + "%");
+        }
+    }
+
+    public void printAttendancePercentage(String clientName, int programId) {
+        // Get client by name
+        Client client = Client.getClientByName(clientName);
+        if (client == null) {
+            System.out.println("Client not found: " + clientName);
+            return;
+        }
+
+
+        double attendancePercentage = client.getAttendancePercentage(programId);
+        System.out.println("Attendance percentage for client " + clientName + " in program " + programId + ": " + attendancePercentage + "%");
+    }
+
 
     public boolean  countActivePrograms(LocalDate d)
     {
@@ -243,7 +264,7 @@ public class Admin  extends User {
         int count=0;
         for (Program program : ProgramService.allPrograms) {
             if (!program.isCompleted(d))
-                System.out.println(" id program 🙁"+program.getId() +")"+program.getName() + "is active program The start date for program is  " + program.getStartDate() + " the duration for program is " + program.getDuration());
+                System.out.println(" id program "+program.getId() +")"+program.getName() + "is active program The start date for program is  " + program.getStartDate() + " the duration for program is " + program.getDuration());
         }
     }
 
@@ -281,6 +302,9 @@ public class Admin  extends User {
         }
         return false;
     }
-//
+
+
+
+
 
 }

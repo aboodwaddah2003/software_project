@@ -17,7 +17,7 @@ public class Userlist {
         User u2 = new User("bayan", "bayan@gmail.com", "1234", "Instructor", "Prime");
         User u3 = new User("waddah", "waddah@gmail.com", "1234", "Instructor", "Prime");
         Client c1 = new Client("ammar");
-        Instructor n1 = new Instructor("mahmoud", "moh@gmail.com", "10203040", "Instructor", "Gold");
+        Client n1 = new Client("mahmoud", "moh@gmail.com", "10203040", "Client", "Gold");
         Instructor n2 = new Instructor("alaa22", "alaa22@gmail.com", "1234", "Instructor", "Silver");
 
         addUserIfNotExists(u);

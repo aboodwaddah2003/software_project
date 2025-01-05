@@ -1,6 +1,8 @@
 package GYM;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Program {
     private String name;
@@ -15,16 +17,18 @@ public class Program {
 
     private LocalDate startDate;
     private  double price;
-    private  int count ;
+    private  int count=0 ;
 
+    private List<Milestone> programMilestones;
     public Program(String name, String difficultyLevel, String focusArea,double price,int duration) {
         this.name = name;
         this.difficultyLevel = difficultyLevel;
         this.focusArea = focusArea;
-        count=0;
        this.price=price;
        this.duration=duration;
        this.startDate=LocalDate.now();
+       this.programMilestones= new ArrayList<>();
+       this.id=++count;
     }
 
     public Program(String name, String difficultyLevel, double price,
@@ -165,5 +169,25 @@ public class Program {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public void addMilestone(Milestone milestone) {
+        programMilestones.add(milestone);
+    }
+
+    public double calculateAttendancePercentage() {
+        int totalMilestones = programMilestones.size();
+        int attendedCount = 0;
+
+        for (Milestone milestone : programMilestones) {
+            if (milestone.getAttendance().equalsIgnoreCase("present")) {
+                attendedCount++;
+            }
+        }
+
+        if (totalMilestones == 0) {
+            return 0.0;
+        }
+        return (double) attendedCount / totalMilestones * 100;
     }
 }

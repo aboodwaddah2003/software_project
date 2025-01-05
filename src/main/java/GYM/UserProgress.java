@@ -16,17 +16,13 @@ public class UserProgress {
             return false;
         }
 
-
         milestones.add(new Milestone(weight, bmi, attendance));
         return true;
     }
 
-
     public List<Milestone> getMilestones() {
         return milestones;
     }
-
-
 
 
     public boolean displayProgressChart() {

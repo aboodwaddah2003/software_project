@@ -7,9 +7,9 @@ public class Client extends User {
     private int age;
     private String fitnessGoals;
     private String dietaryPreferences;
-    private List<Program> enrolledPrograms;
+    static  List<Program> enrolledPrograms;
 
-    public static ArrayList<Milestone> milestones= new ArrayList<>();
+    public static List<Milestone> milestones;
     private FeedbackSubmissionService feedbackService;
     public Client(String userName) {
         super(userName, "default_email@example.com", "default_password", "Client", "Basic");
@@ -21,8 +21,11 @@ public class Client extends User {
         super(userName, email, password, type, subscriptionPlan);
         this.enrolledPrograms = new ArrayList<>();
         this.feedbackService = new FeedbackService();
+        this.milestones=new ArrayList<>();
     }
-
+    public List<Milestone> getMilestones() {
+        return milestones;
+    }
 
     public int getAge() {
         return age;
@@ -96,24 +99,9 @@ public class Client extends User {
         return false;
     }
 
-    public static void addMilestone( String weight, String bmi, String attendance,String clientName){
-        Milestone milestone = new Milestone(weight, bmi, attendance,clientName);
-        milestones.add(milestone);
-        System.out.println("Milestone added: " + milestone);
 
 
-    }
 
-    public static void displayMilestones() {
-        if (milestones.isEmpty()) {
-            System.out.println("No milestones available.");
-        } else {
-            System.out.println("All Milestones:");
-            for (Milestone milestone : milestones) {
-                System.out.println(milestone);
-            }
-        }
-    }
 
     public static boolean searchClient(String name) {
         for (Milestone milestone : milestones) {
@@ -133,6 +121,37 @@ public class Client extends User {
             }
         }
         System.out.println("No milestone found with the client name: " + name);
+    }
+
+    public static Client getClientByName(String name) {
+        int i = Userlist.search(name);
+        if (i == -1) {
+            return null;
+        } else {
+            return (Client) Userlist.users.get(i);
+        }
+    }
+    public void addMilestone(Milestone milestone) {
+        milestones.add(milestone);
+    }
+
+    public double getAttendancePercentage(int programId) {
+        int attendedCount = 0;
+        int totalMilestones = 0;
+
+        for (Milestone milestone : milestones) {
+            if (milestone.getProgramId() == programId) {
+                totalMilestones++;
+                if (milestone.getAttendance().equalsIgnoreCase("Present")) {
+                    attendedCount++;
+                }
+            }
+        }
+        if (totalMilestones == 0) {
+            return 0.0;
+        }
+
+        return (double) attendedCount / totalMilestones * 100;
     }
 
 

@@ -1,5 +1,7 @@
 package GYM;
 
+import java.util.List;
+
 public class Milestone {
     private String weight;
     private String bmi;
@@ -7,16 +9,24 @@ public class Milestone {
     private String clientName;
 
 
+
+    private String date;
+    private int programId;
+
+
     public Milestone(String weight, String bmi, String attendance) {
         this.weight = weight;
         this.bmi = bmi;
         this.attendance = attendance;
     }
-    public Milestone(String weight, String bmi, String attendance, String clientName) {
+
+    public Milestone(String weight, String bmi, String attendance, String clientName,String date,int programId) {
         this.weight = weight;
         this.bmi = bmi;
         this.attendance = attendance;
         this.clientName = clientName;
+        this.date=date;
+        this.programId=programId;
     }
 
 
@@ -39,12 +49,8 @@ public class Milestone {
 
     @Override
     public String toString() {
-        return "Client: " + clientName +
-                "\nMilestone: " + weight +
-                "\nDescription: " + bmi +
-                "\nDue Date: " + attendance;
+        return "Milestone [Weight=" + weight + ", BMI=" + bmi + ", Attendance=" + attendance + ", Date=" + date + "]";
     }
-
     public void setWeight(String newWeight) {
         if (newWeight == null || newWeight.isEmpty()) {
             System.out.println("Invalid weight value.");
@@ -93,4 +99,13 @@ public class Milestone {
             System.out.println("Invalid attendance format. Please use 'X days'.");
         }
     }
+    public int getProgramId() {
+        return programId;
+    }
+
+    public void setProgramId(int programId) {
+        this.programId = programId;
+    }
+
+
 }

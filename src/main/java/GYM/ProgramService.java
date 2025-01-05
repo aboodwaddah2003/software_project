@@ -14,9 +14,6 @@ public class ProgramService {
 
 
 
-
-
-
     public ProgramService() {
 
         if (allPrograms.isEmpty()) {
@@ -61,6 +58,17 @@ public class ProgramService {
         } else {
             System.out.println("Program 'Yoga Program' not found.");
         }
+    }
+    public  static  void fillData4()
+    {
+        Client n1 = new Client("sead", "moh@gmail.com", "10203040", "Client", "Gold");
+        Instructor I1 =new Instructor("khader","khader@gmail.com","20304050",
+                "Instructor","Gold");
+        ProgramService.enrollClientInProgram(n1,"Muscle Gain Program");
+        I1.addMilestone(1,"sead","90","5","present","1/9/2024");
+        I1.addMilestone(1,"sead","86","4.2","present","12/9/2024");
+        I1.addMilestone(1,"sead","78","4","present","30/9/2024");
+        I1.addMilestone(1,"sead","75","3.2"," not present","4/10/2024");
     }
 
 
@@ -130,14 +138,6 @@ public class ProgramService {
     }
 
 
-    public List<Client> getRegisteredClients() {
-        return registeredClients;
-    }
-
-
-    public static List<Program> getAllPrograms() {
-        return allPrograms;
-    }
 
     public static String getProgramSchedule(String programName) {
         Program program = getProgramByName(programName);
