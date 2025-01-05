@@ -58,16 +58,10 @@ public class FeedbackService implements FeedbackSubmissionService {
         complaints.add(complaint);
     }
 
+
     public static void submitFeedback(Feedback feedback) {
         feedbackList.add(feedback);
-       // System.out.println("Feedback submitted for program: " + feedback.getProgram().getName());
 
-
-        if (feedbackList.contains(feedback)) {
-          //  System.out.println("Feedback successfully added to list.");
-        } else {
-            System.out.println("Error: Feedback was not added.");
-        }
     }
 
 

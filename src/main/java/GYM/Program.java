@@ -88,7 +88,7 @@ public class Program {
     }
     public  void  increaseSubProgramCount()
     {
-        this.count++;
+        count++;
     }
     public int numOfClientSub()
     {
