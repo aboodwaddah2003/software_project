@@ -6,7 +6,7 @@ public class ContentMangerService {
     public static ArrayList<ContentManger>contentMangers=new ArrayList<ContentManger>();
 
 
-private ContentMangerService()
+public ContentMangerService()
 {
 
 }
