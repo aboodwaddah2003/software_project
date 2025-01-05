@@ -99,12 +99,6 @@ public class Client extends User {
         return false;
     }
 
-
-
-
-
-
-
     public static Client getClientByName(String name) {
         int i = Userlist.search(name);
         if (i == -1) {
@@ -135,6 +129,15 @@ public class Client extends User {
 
         return (double) attendedCount / totalMilestones * 100;
     }
-
+    public void displayEnrolledPrograms() {
+        if (enrolledPrograms.isEmpty()) {
+            System.out.println("Client is not enrolled in any programs.");
+        } else {
+            System.out.println("Enrolled programs:");
+            for (Program program : enrolledPrograms) {
+                System.out.println("- " + program.getName());
+            }
+        }
+    }
 
 }

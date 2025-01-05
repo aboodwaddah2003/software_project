@@ -154,7 +154,9 @@ public class ProgramService {
         }
     }
 
-
+    public static List<Program> getAllPrograms() {
+        return allPrograms;
+    }
 
     public static String getProgramSchedule(String programName) {
         Program program = getProgramByName(programName);

@@ -8,7 +8,6 @@ public class ContentMangerService {
 
 
 
-
 public static void showAllContent()
 {
     for(ContentManger contentManger : contentMangers)
