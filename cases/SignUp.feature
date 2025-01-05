@@ -28,7 +28,10 @@ Scenario Outline: user try to signup with username is exist already
       | userName | password        | email            | role    |
       | osama    |                 | os@gmail.com     | admin   |
       |          | ahmed123        | ahmed@gmail.com  | Client  |
-      | najwa    | naj1234wa       |                  | admin   |
+      | 123      | naj1234wa       | ahmed@gmail.com  | Client   |
+      | najwa    | naj1234wa       | ahmed@gmail.com  | basic   |
+      | najwa    | 123             |ahmed@gmail.com   | Client  |
+      | najwa    | naj1234wa       |     asa          | Client   |
 
 
     Scenario: user signup with invalid email

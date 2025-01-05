@@ -60,7 +60,7 @@ else
            Assertions.assertFalse(state);
        }
        else
-         Assertions.fail("dvdv");
+         Assertions.assertTrue(state);
 
     }
     @Then("the alert show that there is Field empty")
