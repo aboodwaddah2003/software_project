@@ -18,6 +18,8 @@ public class Userlist {
         User u3 = new User("waddah", "waddah@gmail.com", "1234", "Instructor", "Prime");
         Client c1 = new Client("ammar");
         Client n1 = new Client("mahmoud", "moh@gmail.com", "10203040", "Client", "Gold");
+        Client c2 = new Client("mahmoud12", "moh@gmail.com", "10203040", "Client", "Gold");
+        Client c3 = new Client("noor123", "moh@gmail.com", "10203040", "Client", "Gold");
         Instructor n2 = new Instructor("alaa22", "alaa22@gmail.com", "1234", "Instructor", "Silver");
 
         addUserIfNotExists(u);
@@ -27,6 +29,8 @@ public class Userlist {
         addUserIfNotExists(c1);
         addUserIfNotExists(n1);
         addUserIfNotExists(n2);
+        addUserIfNotExists(c2);
+        addUserIfNotExists(c3);
     }
 
     public static void fillData3()

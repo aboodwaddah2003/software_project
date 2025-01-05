@@ -64,11 +64,28 @@ public class ProgramService {
         Client n1 = new Client("sead", "moh@gmail.com", "10203040", "Client", "Gold");
         Instructor I1 =new Instructor("khader","khader@gmail.com","20304050",
                 "Instructor","Gold");
+        Client n2 = new Client("mahmoud", "moh@gmail.com", "10203040", "Client", "Gold");
+        Client c2 = new Client("mahmoud12", "moh@gmail.com", "10203040", "Client", "Gold");
+        Client c3 = new Client("noor123", "moh@gmail.com", "10203040", "Client", "Gold");
         ProgramService.enrollClientInProgram(n1,"Muscle Gain Program");
-        I1.addMilestone(1,"sead","90","5","present","1/9/2024");
-        I1.addMilestone(1,"sead","86","4.2","present","12/9/2024");
-        I1.addMilestone(1,"sead","78","4","present","30/9/2024");
-        I1.addMilestone(1,"sead","75","3.2"," not present","4/10/2024");
+        ProgramService.enrollClientInProgram(n2,"Weight Loss Program");
+        ProgramService.enrollClientInProgram(c2,"Flexibility Program");
+        ProgramService.enrollClientInProgram(c3,"Flexibility Program");
+
+        I1.addMilestone(1, "sead", "90", "5", "present", "1/9/2024");
+        I1.addMilestone(1, "sead", "86", "4.2", "present", "12/9/2024");
+        I1.addMilestone(1, "sead", "78", "4", "present", "30/9/2024");
+        I1.addMilestone(1, "sead", "75", "3.2", "not present", "4/10/2024");
+
+        I1.addMilestone(2, "mahmoud", "95", "5.1", "present", "3/9/2024");
+        I1.addMilestone(2, "mahmoud", "92", "4.8", "not present", "10/9/2024");
+        I1.addMilestone(2, "mahmoud", "88", "4.5", "present", "25/9/2024");
+        I1.addMilestone(3, "mahmoud12", "89", "4.6", "present", "6/9/2024");
+
+        I1.addMilestone(3, "noor123", "84", "4.3", "not present", "15/9/2024");
+        I1.addMilestone(3, "noor123", "82", "4.0", "present", "28/9/2024");
+
+
     }
 
 

@@ -224,15 +224,25 @@ public class Admin  extends User {
 
     }
 
-    public void printAttendancePercentageForPrograms() {
+    public boolean printAttendancePercentageForPrograms() {
+        if (enrolledPrograms.isEmpty()) {
+            System.out.println("No programs enrolled.");
+            return false;
+        }
+
+        boolean hasAttendanceData = false;
+
         for (Program program : enrolledPrograms) {
             double attendancePercentage = program.calculateAttendancePercentage();
             System.out.println("Attendance Percentage for " + program.getName() + ": " + attendancePercentage + "%");
+            hasAttendanceData = true;
         }
+
+        return hasAttendanceData;
     }
 
     public void printAttendancePercentage(String clientName, int programId) {
-        // Get client by name
+
         Client client = Client.getClientByName(clientName);
         if (client == null) {
             System.out.println("Client not found: " + clientName);

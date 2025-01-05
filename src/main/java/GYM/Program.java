@@ -17,7 +17,7 @@ public class Program {
 
     private LocalDate startDate;
     private  double price;
-    private  int count=0 ;
+    private static int count=0 ;
 
     private List<Milestone> programMilestones;
     public Program(String name, String difficultyLevel, String focusArea,double price,int duration) {
@@ -44,16 +44,7 @@ public class Program {
     }
 
 
-    //default constructor
-    public Program() {
-        this.name = "";
-        this.difficultyLevel = "";
-        this.price=0;
-        this.duration=0;
-        this.goals="";
-        this.Scheduels ="";
-        this.imgPath="";
-    }
+
 
 
 

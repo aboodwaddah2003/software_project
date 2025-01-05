@@ -72,4 +72,16 @@ A1.generateRevenueReport();
 
     }
 
+    @When("want to show all attendance percentage in each program")
+    public void want_to_show_all_attendance_percentage_in_each_program() {
+      state=A1.printAttendancePercentageForPrograms();
+    }
+    @Then("the system view the attendance Reports that include the attendance percentage")
+    public void the_system_view_the_attendance_reports_that_include_the_attendance_percentage() {
+if(state)
+    Assertions.assertTrue(true);
+else
+    Assertions.fail("dvdv");
+    }
+
 }
