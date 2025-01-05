@@ -103,25 +103,7 @@ public class Client extends User {
 
 
 
-    public static boolean searchClient(String name) {
-        for (Milestone milestone : milestones) {
-            if (name.equals(milestone.getClientName())) {
-                return true;
-            }
-        }
-        return false;
-    }
 
-
-    public static void printMilestoneByName(String name) {
-        for (Milestone milestone : milestones) {
-            if (name.equals(milestone.getClientName())) {
-                System.out.println(milestone.toString());
-                return;
-            }
-        }
-        System.out.println("No milestone found with the client name: " + name);
-    }
 
     public static Client getClientByName(String name) {
         int i = Userlist.search(name);

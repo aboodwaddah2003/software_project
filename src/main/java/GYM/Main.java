@@ -21,20 +21,7 @@ public class Main {
 
 
 
- public static void main(String[] args) {
-     Userlist userlist = new Userlist();
-     Userlist.fillData();
-     Instructor n1 = new Instructor("mahmoud", "moh@gmail.com", "10203040", "Instructor", "Gold");
-     Admin u = new Admin("osama", "osama@gmail.com", "1234", "Admin", " ");
-     Client u1 = new Client("abood", "abood@gmail.com", "1234", "Client", "Basic");
-
-     ProgramService programService=new ProgramService();
-
-   ProgramService.enrollClientInProgram(u1,"Muscle Gain Program");
-   n1.addMilestone(1,"abood","90","5.8","present","18/9/2024");
-   u.printAttendancePercentageForPrograms();
-
- }
+ //public static void main(String[] args) {
 //
 //        Scanner scanner = new Scanner(System.in);
 //        Userlist.fillData();

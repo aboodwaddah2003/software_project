@@ -76,6 +76,10 @@ state=A1.UpdateUserName("loay54","osama");
     @When("the admin enter the new valid email or valid role or valid subscription Plans or valid password")
     public void theAdminEnterTheNewValidEmailOrValidRoleOrValidSubscriptionPlansOrValidPassword() {
         state=A1.updateData("waddah","abd21@gmail.com","12345678","","");
+        state=A1.updateData("waddah","abd","12345678","","");
+        state=A1.updateData("waddah","","12345678","","ss");
+        state=A1.updateData("waddah","abd21@gmail.com","128","","");
+        state=A1.updateData("waddah","abd21@gmail.com","12345678","ee","");
     }
 
     @When("the admin enter the new  email that already in system")

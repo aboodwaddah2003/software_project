@@ -22,15 +22,6 @@ public class Instructor extends User {
     }
 
 
-    public void ClientTracking(String Name) {
-    if (Client.searchClient(Name)){
-        Client.printMilestoneByName(Name);
-    }else
-    System.out.println(Name+" does not exist");
-
-    }
-
-
     public void SendMessage(Message m1)
     {
         if (m1.getContent().isEmpty()) {

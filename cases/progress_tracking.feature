@@ -12,6 +12,9 @@ Feature: Progress Tracking
       | Weight | BMI  | Attendance        |
       | 70kg   | 22.5 | 3 days this week  |
       | 68kg   | 21.8 | 4 days this week  |
+      |        | 22.5 | 3 days this week  |
+      | 68kg   |       | 4 days this week  |
+      | 68kg   |       |                   |
     Then the system saves all milestones successfully
     And displays a confirmation message "All milestones saved successfully!"
 
