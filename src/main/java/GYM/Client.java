@@ -9,6 +9,8 @@ public class Client extends User {
     private String dietaryPreferences;
     static  List<Program> enrolledPrograms;
 
+    public static ArrayList<Message> messages= new ArrayList<>();
+
     public static List<Milestone> milestones;
     private FeedbackSubmissionService feedbackService;
     public Client(String userName) {
@@ -140,4 +142,7 @@ public class Client extends User {
         }
     }
 
+    public void receiveMessage(Message message) {
+        messages.add(message);
+    }
 }

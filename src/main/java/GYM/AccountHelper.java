@@ -6,7 +6,7 @@ import java.util.ArrayList;
 
 class ClientRepository {
 
-    private List<Client> clients;
+    public static List<Client> clients;
 
     //constructor
     public ClientRepository(List<Client> clients) {

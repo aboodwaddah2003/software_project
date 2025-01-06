@@ -20,6 +20,13 @@ public class Milestone {
         this.attendance = attendance;
     }
 
+    public Milestone(String weight, String bmi, String attendance, String clientName) {
+        this.weight = weight;
+        this.bmi = bmi;
+        this.attendance = attendance;
+        this.clientName = clientName;
+    }
+
     public Milestone(String weight, String bmi, String attendance, String clientName,String date,int programId) {
         this.weight = weight;
         this.bmi = bmi;
@@ -28,6 +35,7 @@ public class Milestone {
         this.date=date;
         this.programId=programId;
     }
+
 
 
     public String getWeight() {

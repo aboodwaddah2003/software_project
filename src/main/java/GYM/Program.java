@@ -15,32 +15,20 @@ public class Program {
 
     private int duration;
 
+    private List<Milestone> programMilestones;
+
     private LocalDate startDate;
     private  double price;
-    private static int count=0 ;
+    private  int count ;
 
-    private List<Milestone> programMilestones;
     public Program(String name, String difficultyLevel, String focusArea,double price,int duration) {
         this.name = name;
         this.difficultyLevel = difficultyLevel;
         this.focusArea = focusArea;
-       this.price=price;
-       this.duration=duration;
-       this.startDate=LocalDate.now();
-       this.programMilestones= new ArrayList<>();
-       this.id=++count;
-    }
-
-    public Program(String name, String difficultyLevel, double price,
-                   int duration, String goals, String Scheduels, String imgPath)
-    {
-        this.name = name;
-        this.difficultyLevel = difficultyLevel;
+        count=0;
         this.price=price;
         this.duration=duration;
-        this.goals=goals;
-        this.Scheduels = Scheduels;
-        this.imgPath=imgPath;
+        this.startDate=LocalDate.now();
     }
 
 
@@ -50,9 +38,7 @@ public class Program {
 
 
 
-    public String getName() {
-        return name;
-    }
+
 
     public String getDifficultyLevel() {
         return difficultyLevel;
@@ -64,15 +50,10 @@ public class Program {
 
     @Override
     public boolean equals(Object obj) {
-        if (this == obj) return true; // Check for reference equality
-        if (obj == null || getClass() != obj.getClass()) return false; // Check for null and class type
+        if (this == obj) return true;
+        if (obj == null || getClass() != obj.getClass()) return false;
         Program program = (Program) obj;
-        return name.equals(program.name); // Compare the 'name' field for equality
-    }
-
-    @Override
-    public int hashCode() {
-        return name.hashCode(); // Generate a hash code based on the 'name' field
+        return name.equals(program.name);
     }
 
 
@@ -88,7 +69,7 @@ public class Program {
     }
     public  void  increaseSubProgramCount()
     {
-        count++;
+        this.count++;
     }
     public int numOfClientSub()
     {
@@ -109,7 +90,6 @@ public class Program {
     }
 
     public boolean isCompleted(LocalDate fakeToday) {
-        startDate=fakeToday;
         LocalDate endDate = startDate.plusWeeks(duration);
 
         return fakeToday.isAfter(endDate);
@@ -162,8 +142,19 @@ public class Program {
         this.id = id;
     }
 
-    public void addMilestone(Milestone milestone) {
-        programMilestones.add(milestone);
+    public void setName(String name) {
+        this.name = name;
+    }
+    public String getName() {
+        return name;
+    }
+
+    public void setDifficultyLevel(String difficultyLevel) {
+        this.difficultyLevel = difficultyLevel;
+    }
+
+    public void setFocusArea(String focusArea) {
+        this.focusArea = focusArea;
     }
 
     public double calculateAttendancePercentage() {
@@ -181,4 +172,8 @@ public class Program {
         }
         return (double) attendedCount / totalMilestones * 100;
     }
+    public void addMilestone(Milestone milestone) {
+        programMilestones.add(milestone);
+    }
+
 }

@@ -11,88 +11,68 @@ import java.time.LocalDate;
 
 public class ProgramManagementTest {
 
-     Instructor I1;
-    ProgramManagementPage P1=new ProgramManagementPage();
-     Program P2 = new Program("Yoga", "easy", 10, 0,
-             "goals","online", "yoga.jpg");
-    Program P3 = new Program("Yoga", "easy", -1, 8,
-            "goals","online", "yoga.jpg");
+    Instructor I1=new Instructor("userName",  "email",
+            "password",  "type", "subscriptionPlan");
+    Program P3,P2 = new Program("season", "hard","hands", 30, 4);
 
-    Program P4 = new Program("Yoga", "easy", 0, 8,
-            "goals","", "yoga.jpg");
 
-    Program P5 = new Program("Yoga", "easy", 10, -5,
-            "goals","", "yoga.jpg");
-
-    Program P6 = new Program("Yoga", "easy", 10, 5,
-            "goals","", "yoga.jpg");
-
-    Program P7 = new Program("Yoga", "", 10, -5,
-            "","online", "yoga.jpg");
     public boolean Created,Updated,Delete;
-    private LocalDate localDate=LocalDate.of(2025, 1, 1);
+    private LocalDate StartDate =LocalDate.of(2025, 1, 1);
+    private LocalDate fakeDate;
 
 
     @Given("the instructor in the programs management page3")
-        public void the_instructor_in_the_programs_management_page3 () {
-        I1 = new Instructor("mahmoud", "moh@gmail.com",
-                "10203040", "Instructor", "Gold");
+    public void the_instructor_in_the_programs_management_page3 () {
 
 
     }
 
-        @When("the instructor select CreateNewProgram")
-        public void the_instructor_select_create_new_program () {
+    @When("the instructor select CreateNewProgram")
+    public void the_instructor_select_create_new_program () {
         // Write code here that turns the phrase above into concrete actions
-            P1.CreateNewProgram(P2);
-            P1.CreateNewProgram(P3);
-            P1.CreateNewProgram(P4);
-            P1.CreateNewProgram(P5);
-            P1.CreateNewProgram(P6);
-            P1.CreateNewProgram(P7);
-
-        Created = true;
-    }
-
-        @When("the instructor provide the required details")
-        public void the_instructor_provide_the_required_details () {
-        P2 = new Program("Yoga", "hard", 20, 6,
-                "goal1", "offline", "yoga.jpg");
-    }
-
-
-        @Then("the system saves the new program and displays a confirmation message,And the program becomes available for clients.")
-        public void the_system_saves_the_new_program_and_displays_a_confirmation_message_and_the_program_becomes_available_for_clients() {
-        Assertions.assertTrue(Created, "New program created");
+        Created=I1.CreateNewProgram(P2);
 
     }
 
-        /////////////////////////////////////////////////////////////////////////////////////done//
 
-        @Given("the instructor in programs management page3")
-        public void theInstructorInProgramsManagementPage3 () {
+    @Then("the system saves the new program and displays a confirmation message," +
+            "And the program becomes available for clients.")
+    public void the_system_saves_the_new_program_and_displays_a_confirmation_message_and_the_program_becomes_available_for_clients() {
+        if (Created)
+            Assertions.assertTrue(true,"Program Created");
+        else
+            Assertions.fail("Program does not Created");
+
+    }
+
+    /////////////////////////////////////////////////////////////////////////////////////done//
+
+    @Given("the instructor in programs management page3")
+    public void theInstructorInProgramsManagementPage3 () {
         //duplicated
     }
 
-        @When("the instructor try to save the program without providing inputs")
-        public void the_instructor_try_to_save_the_program_without_providing_inputs () {
-        P2 = new Program("", "easy", 10, 8,
-                "goals", "", "yoga.jpg");
-        Created = false;
+    @When("the instructor try to save the program without providing inputs")
+    public void the_instructor_try_to_save_the_program_without_providing_inputs () {
+        P2 = new Program("", "hard","", 0, 0);
+        Created=I1.CreateNewProgram(P2);
 
     }
 
 
-        @Then("the creation is unsuccessfully and alert show you should fill all details")
-        public void the_creation_is_unsuccessfully_and_alert_show_you_should_fill_all_details () {
-        Assertions.assertFalse(Created, "The creation is unsuccessfully,You should fill all details");
+    @Then("the creation is unsuccessfully and alert show you should fill all details")
+    public void the_creation_is_unsuccessfully_and_alert_show_you_should_fill_all_details () {
+        if (!Created)
+            Assertions.assertFalse(Created,"Program Created");
+        else
+            Assertions.fail("Program does not Created");
 
     }
 
-//////////////////////////////////////////////////////////////////////////////////
+    //////////////////////////////////////////////////////////////////////////////////
     @Given("the instructor in the programs management page33")
     public void the_instructor_in_the_programs_management_page33() {
-    //duplicated
+        //duplicated
     }
 
     @When("the instructor select an existing program and click on the {string} button")
@@ -103,16 +83,16 @@ public class ProgramManagementTest {
 
     @When("the instructor update the program details")
     public void the_instructor_update_the_program_details() {
-        P2 = new Program("Yoga", "hard", 10, 8,
-                "goals","online", "yoga.jpg");
+        Updated=I1.UpdateProgram("season", "hard","hands", 30, 4);
 
-        P1.UpdateProgram(P2);
-        Updated=true;
     }
 
     @Then("the system saves the updated program and displays a confirmation message")
     public void the_system_saves_the_updated_program_and_displays_a_confirmation_message() {
-        Assertions.assertTrue(Updated, "The program updated successfully.");
+        if (Updated)
+            Assertions.assertTrue(true,"Program Updated");
+        else
+            Assertions.fail("Error in updated program");
     }
 
     //////////////////////////////////////////////////////////////////////////////////
@@ -123,16 +103,18 @@ public class ProgramManagementTest {
 
     @When("the instructor try to save the changes without providing mandatory fields")
     public void the_instructor_try_to_save_the_changes_without_providing_mandatory_fields() {
-        P2 = new Program("", "", 10, 8,
-                "","", "yoga.jpg");
+        P2 = new Program("", "","", 10, 8 );
 
-        P1.UpdateProgram(P2);
-        Updated=false;
+        Updated=I1.UpdateProgram("",  "",  "focusArea", 10, 4);
+
     }
 
     @Then("the system shows validation error messages indicating the missing fields.")
     public void the_system_shows_validation_error_messages_indicating_the_missing_fields() {
-        Assertions.assertFalse(Updated, "Missing fields, no update.");
+        if (!Updated)
+            Assertions.assertFalse(false,"Program Created");
+        else
+            Assertions.fail("Error in updated program");
     }
 
     //////////////////////////////////////////////////////////////////////////////////
@@ -143,30 +125,42 @@ public class ProgramManagementTest {
 
     @When("the instructor select an existing program and click on the delete button")
     public void the_instructor_select_an_existing_program_and_click_on_the_delete_button(){
-        P1.Delete(P2,localDate);
-        Delete=true;
+        P3= new Program ("Weight Loss Program", "Beginner", "Weight loss", 120,6);
+        P3.setStartDate(StartDate);
+        fakeDate=LocalDate.of(2025,3,20);
+        Delete=I1.Delete(P3,fakeDate);
+
     }
 
     @Then("the system permanently deletes the program")
     public void the_system_permanently_deletes_the_program() {
-    Assertions.assertTrue(Delete,"The Program Deleted Successfully");
+        if (Delete)
+            Assertions.assertTrue(true,"Program Deleted Successfully");
+        else
+            Assertions.fail("Error in delete program");
+
     }
 
     //////////////////////////////////////////////////////////////////////////////////
-    @Given("the instructor tries to delete a program assigned to active gym members")
-    public void the_instructor_tries_to_delete_a_program_assigned_to_active_gym_members() {
+    @Given("the instructor tries to delete a program not complete")
+    public void the_instructor_tries_to_delete_a_program_not_complete() {
 
     }
 
     @When("the instructor click the {string} button6")
     public void the_instructor_click_the_button6(String string) {
-        P1.Delete(P2,localDate);
-        Delete=false;
+        P3= new Program ("to delete", "hard","hands", 30, 4);
+        P3.setStartDate(StartDate);
+        fakeDate=LocalDate.of(2025,1,25);
+        Delete=I1.Delete(P3,fakeDate);
     }
 
     @Then("the system shows a notification that the program cannot be deleted until it is unassigned from all active members")
     public void the_system_shows_a_notification_that_the_program_cannot_be_deleted_until_it_is_unassigned_from_all_active_members() {
-    Assertions.assertFalse(Delete,"the program can't be deleted until it is unassigned from all active members");
+        if (!Delete)
+            Assertions.assertFalse(false,"Program does not deleted");
+        else
+            Assertions.fail("Error at delete program");
     }
 
 

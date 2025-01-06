@@ -3,7 +3,6 @@ Feature: Instructor create, update or delete fitness programs.
   Scenario: the instructor successfully create a new program
     Given the instructor in the programs management page3
     When the instructor select CreateNewProgram
-    And the instructor provide the required details
     Then the system saves the new program and displays a confirmation message,And the program becomes available for clients.
 
   Scenario: the instructor try to save without providing inputs
@@ -40,7 +39,7 @@ Feature: Instructor create, update or delete fitness programs.
 
   Scenario: Restriction on Deletion
 
-    Given the instructor tries to delete a program assigned to active gym members
+    Given the instructor tries to delete a program not complete
     When the instructor click the "delete" button6
     Then the system shows a notification that the program cannot be deleted until it is unassigned from all active members
 

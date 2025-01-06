@@ -1,21 +1,11 @@
 Feature: Instructor Tracking the progress of clients
 
-  Scenario: The instructor add milestones for client
+  Scenario: Monitor Client Progress
 
-    Given the instructor clicks on the clientsTracking
+    Given the instructor clicks on the "clientsTracking" button7
     When the instructor select a specific client
-    And  add the required data for the client
-    Then the system will add the data for specific client
-
-
-
-  Scenario: The instructor want to progress client
-
-    Given the instructor clicks on the clientsTracking
-    When the instructor search on specific client
-    And  press show activity button
-    Then the system will  the data for specific client
-
+    And the instructor clicks on the "progressMetrics" button8
+    Then the system displays progress metrics.
 
   Scenario: Send Motivational Reminders
 
