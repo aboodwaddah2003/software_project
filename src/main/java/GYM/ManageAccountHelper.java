@@ -117,16 +117,7 @@ public static boolean isValidFormatDate(String date)  ///15-09-2024
     }
 }
 
-    public  static void showAllInstructorRequest() {
-    for (Instructor user : instructors) {
-      {
 
-            if (user.getStatus().equals("pending")) {
-                System.out.println(user);
-            }
-        }
-    }
-}
 
 }
 

@@ -11,7 +11,6 @@ import static GYM.ContentMangerService.*;
 import static GYM.FeedbackService.*;
 import static GYM.Client.*;
 import static GYM.FeedbackService.resolveComplaint;
-import static GYM.ManageAccountHelper.showAllInstructorRequest;
 import static GYM.ProgramService.*;
 import static GYM.Userlist.*;
 
@@ -992,6 +991,18 @@ public class Main {
 //
 //        System.out.println("Error: The user is not a client.");
 //        return false;
+//    }
+
+
+//    public  static void showAllInstructorRequest() {
+//        for (Instructor user : instructors) {
+//            {
+//
+//                if (user.getStatus().equals("pending")) {
+//                    System.out.println(user);
+//                }
+//            }
+//        }
 //    }
 
 }
