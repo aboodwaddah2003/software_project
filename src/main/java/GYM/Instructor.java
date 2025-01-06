@@ -35,8 +35,9 @@ public class Instructor extends User {
 
     public static boolean searchClient(String name) {
         for (Milestone milestone : milestones) {
-            if (name==milestone.getClientName())
+            if (name.equals(milestone.getClientName())) {
                 return true;
+            }
         }
         return false;
     }
@@ -84,24 +85,26 @@ public class Instructor extends User {
         }
     }
 
-    public static void printMilestoneByName(String name){
+    public static void printMilestoneByName(String name) {
         for (Milestone milestone : milestones) {
-            if (name==milestone.getClientName()){
+            if (name.equals(milestone.getClientName())) {
                 System.out.println(milestone.toString());
                 return;
             }
-
         }
-
-
+        System.out.println("Milestone not found for client: " + name);
     }
 
-    public boolean CreateNewProgram(Program p){
-        if (p.getName()==null || p.getName()==""){
+
+
+
+    public boolean CreateNewProgram(Program p) {
+        if (p.getName() == null || p.getName().equals("")) {
             System.out.println("Program name cannot be empty");
             return false;
-        } else if (ProgramIsEmpty(p)) return false;
-
+        } else if (ProgramIsEmpty(p)) {
+            return false;
+        }
         ProgramService.allPrograms.add(p);
         System.out.println("Program added");
         return true;
@@ -148,17 +151,17 @@ public class Instructor extends User {
     }
     //used in updateProgram function
     private boolean ProgramIsEmpty(Program p) {
-        if (p.getDifficultyLevel()==null ||p.getDifficultyLevel()=="") {
+        if (p.getDifficultyLevel() == null || p.getDifficultyLevel().equals("")) {
             System.out.println("Program difficulty level cannot be empty");
             return true;
-        } else if (p.getPrice()==0) {
-            System.out.println("Program focus area cannot be empty or zero");
+        } else if (p.getPrice() == 0) {
+            System.out.println("Program price cannot be zero");
             return true;
-        } else if (p.getDuration()==0) {
+        } else if (p.getDuration() == 0) {
             System.out.println("Program duration cannot be empty or zero");
             return true;
-        } else if (p.getFocusArea()==null ||p.getFocusArea()=="") {
-            System.out.println("Program goals cannot be empty");
+        } else if (p.getFocusArea() == null || p.getFocusArea().equals("")) {
+            System.out.println("Program focus area cannot be empty");
             return true;
         }
         return false;

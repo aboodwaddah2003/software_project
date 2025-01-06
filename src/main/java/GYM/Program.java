@@ -49,6 +49,10 @@ public class Program {
         return name.equals(program.name);
     }
 
+    @Override
+    public int hashCode() {
+        return name.hashCode();
+    }
 
 
     @Override
