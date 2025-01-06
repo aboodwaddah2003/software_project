@@ -12,10 +12,12 @@ import org.junit.jupiter.api.Assertions;
 public class InstructorTrackingTest {
 
 
-    public Client C1=new Client("mohammad","mohammad@gmail.com","10203040",
-            "Client","Basic");
+    public Client C1=new Client("abood", "abood@gmail.com", "1234",
+            "Client", "Basic");
     public Instructor I1 =new Instructor("khader","khader@gmail.com","20304050",
             "Instructor","Gold");
+
+    public Milestone milestone=new Milestone("90",  "26",  "7",  C1.getUserName());
     private boolean state,Send;
 
     @Given("the instructor clicks on the {string} button7")
@@ -25,11 +27,13 @@ public class InstructorTrackingTest {
 
     @When("the instructor select a specific client")
     public void the_instructor_select_a_specific_client() {
-        Instructor.addMilestone("89","28","4","mohammad");
+
     }
 
     @When("the instructor clicks on the {string} button8")
     public void the_instructor_clicks_on_the_button8(String clientTracking) {
+
+        Instructor.milestones.add(milestone);
         state=I1.ClientTracking(C1.getUserName());
 
     }

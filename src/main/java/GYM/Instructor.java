@@ -8,7 +8,7 @@ import java.util.Objects;
 public class Instructor extends User {
 
     public static ArrayList<Milestone> milestones= new ArrayList<>();
-
+    private List<Milestone> programMilestones;
 
     public Instructor(String userName, String email, String password, String type,String subscriptionPlan) {
         super(userName, email, password, type,subscriptionPlan);
@@ -23,6 +23,23 @@ public class Instructor extends User {
     }
 
 
+    public boolean ClientTracking(String Name) {
+        if (Instructor.searchClient(Name)){
+            Instructor.printMilestoneByName(Name);
+            return true;
+        }else
+            System.out.println(Name+" does not exist");
+        return false;
+
+    }
+
+    public static boolean searchClient(String name) {
+        for (Milestone milestone : milestones) {
+            if (name==milestone.getClientName())
+                return true;
+        }
+        return false;
+    }
 
 
     public boolean sendMessage(Client client, String content) {
@@ -52,48 +69,9 @@ public class Instructor extends User {
 
 
 
-    public static void addMilestone( String weight, String bmi, String attendance,String clientName){
-        Milestone milestone = new Milestone(weight, bmi, attendance,clientName);
-        milestones.add(milestone);
-        System.out.println("Milestone added: " + milestone);
-
-
+    public void addMilestone(Milestone milestone) {
+        programMilestones.add(milestone);
     }
-
-    public boolean addMilestone(int programId, String clientName, String weight, String bmi, String attendance, String date) {
-        if (isInvalidInput(clientName, weight, bmi, attendance, date)) {
-            System.out.println("Invalid input. All fields are required.");
-            return false ;
-        }
-
-        Client client = Client.getClientByName(clientName);
-        if (client == null) {
-            System.out.println("Client not found: " + clientName);
-            return false;
-        }
-
-        Milestone milestone = new Milestone(weight, bmi, attendance, clientName, date, programId);
-
-        client.addMilestone(milestone);
-
-        boolean programFound = false;
-        for (Program program : client.getEnrolledPrograms()) {
-            if (program.getId() == programId) {
-                program.addMilestone(milestone);
-                programFound = true;
-                break;
-            }
-        }
-        if (programFound) {
-            System.out.println("Milestone added: " + milestone);
-            return true;
-        } else {
-            System.out.println("Program with ID " + programId + " not found for client: " + clientName);
-            return false;
-        }
-
-    }
-
 
     public static void displayMilestones() {
         if (milestones.isEmpty()) {
@@ -118,35 +96,6 @@ public class Instructor extends User {
 
     }
 
-    public boolean ClientTracking(String Name) {
-        if (Instructor.searchClient(Name)){
-            Instructor.printMilestoneByName(Name);
-            return true;
-        }else
-            System.out.println(Name+" does not exist");
-        return false;
-
-    }
-
-    public static boolean searchClient(String name) {
-        for (Milestone milestone : milestones) {
-            if (name==milestone.getClientName())
-                return true;
-        }
-        return false;
-    }
-
-    private static boolean isInvalidInput(String... fields) {
-        for (String field : fields) {
-            if (field == null || field.isEmpty()) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-
-
     public boolean CreateNewProgram(Program p){
         if (p.getName()==null || p.getName()==""){
             System.out.println("Program name cannot be empty");
@@ -159,15 +108,15 @@ public class Instructor extends User {
     }
 
     //the name of the program can't be updated .
-    public boolean UpdateProgram(String name, String difficultyLevel, String focusArea,
+    public boolean UpdateProgram(String name,  String difficultylevel,  String focusarea,
                                  double price,int duration) {
         for (int i = 0; i < ProgramService.allPrograms.size(); i++) {
             if(Objects.equals(name, ProgramService.allPrograms.get(i).getName())){
-                if(ProgramIsEmpty(ProgramService.getProgramByName(name))) return false;
+                if (ProgramIsEmpty(ProgramService.getProgramByName(name))) return false;
 
                 ProgramService.allPrograms.get(i).setName(name);
-                ProgramService.allPrograms.get(i).setDifficultyLevel(difficultyLevel);
-                ProgramService.allPrograms.get(i).setFocusArea(focusArea);
+                ProgramService.allPrograms.get(i).setDifficultyLevel(difficultylevel);
+                ProgramService.allPrograms.get(i).setFocusArea(focusarea);
                 ProgramService.allPrograms.get(i).setPrice(price);
                 ProgramService.allPrograms.get(i).setDuration(duration);
                 System.out.println("Program updated successfully");
@@ -209,10 +158,52 @@ public class Instructor extends User {
             System.out.println("Program duration cannot be empty or zero");
             return true;
         } else if (p.getFocusArea()==null ||p.getFocusArea()=="") {
-            System.out.println("Program Focus area cannot be empty");
+            System.out.println("Program goals cannot be empty");
             return true;
         }
         return false;
     }
 
+
+    public boolean addMilestone(int programId, String clientName, String weight, String bmi, String attendance, String date) {
+        if (isInvalidInput(clientName, weight, bmi, attendance, date)) {
+            System.out.println("Invalid input. All fields are required.");
+            return false ;
+        }
+
+        Client client = Client.getClientByName(clientName);
+        if (client == null) {
+            System.out.println("Client not found: " + clientName);
+            return false;
+        }
+
+        Milestone milestone = new Milestone(weight, bmi, attendance, clientName, date, programId);
+
+        client.addMilestone(milestone);
+
+        boolean programFound = false;
+        for (Program program : client.getEnrolledPrograms()) {
+            if (program.getId() == programId) {
+                program.addMilestone(milestone);
+                programFound = true;
+                break;
+            }
+        }
+        if (programFound) {
+            System.out.println("Milestone added: " + milestone);
+            return true;
+        } else {
+            System.out.println("Program with ID " + programId + " not found for client: " + clientName);
+            return false;
+        }
+
+    }
+    private static boolean isInvalidInput(String... fields) {
+        for (String field : fields) {
+            if (field == null || field.isEmpty()) {
+                return true;
+            }
+        }
+        return false;
+    }
 }

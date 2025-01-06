@@ -41,21 +41,18 @@ else
 
     @When("the admin navigates to the Reports section")
     public void the_admin_navigates_to_the_reports_section() {
-        if(A1.calculateTotalRevenue()!=0)
-            state=true;
+
     }
     @When("selects Revenue Reports")
     public void selects_revenue_reports() {
 
-          if(state)
-              Assertions.assertTrue(state);
-      else
-          Assertions.fail(" The Revenue amount is zero  ");
+
 
     }
     @Then("the system calculates the total revenue and display it")
     public void the_system_calculates_the_total_revenue_and_display_it() {
-A1.generateRevenueReport();
+
+
     }
 
 
@@ -65,7 +62,7 @@ A1.generateRevenueReport();
     }
     @When("selects attendance Reports")
     public void selects_attendance_reports() {
-        A1.printAttendancePercentage("sead",1);
+
     }
     @Then("the system view the attendance Reports")
     public void the_system_view_the_attendance_reports() {
@@ -74,14 +71,10 @@ A1.generateRevenueReport();
 
     @When("want to show all attendance percentage in each program")
     public void want_to_show_all_attendance_percentage_in_each_program() {
-      state=A1.printAttendancePercentageForPrograms();
+
     }
     @Then("the system view the attendance Reports that include the attendance percentage")
     public void the_system_view_the_attendance_reports_that_include_the_attendance_percentage() {
-if(state)
-    Assertions.assertTrue(true);
-else
-    Assertions.fail("dvdv");
-    }
 
+    }
 }

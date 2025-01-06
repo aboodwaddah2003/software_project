@@ -33,13 +33,6 @@ public class Program {
 
 
 
-
-
-
-
-
-
-
     public String getDifficultyLevel() {
         return difficultyLevel;
     }
