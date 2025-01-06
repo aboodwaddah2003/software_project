@@ -61,15 +61,19 @@ A1.generateRevenueReport();
 
     @When("the admin navigates to the Reports section then enter the name of client")
     public void the_admin_navigates_to_the_reports_section_then_enter_the_name_of_client() {
-
+    String name="sead";
     }
     @When("selects attendance Reports")
     public void selects_attendance_reports() {
-        A1.printAttendancePercentage("sead",1);
+state=  A1.printAttendancePercentage("sead",1);
     }
     @Then("the system view the attendance Reports")
     public void the_system_view_the_attendance_reports() {
+     if(state)
+         Assertions.assertTrue(true);
 
+     else
+         Assertions.fail("dvdv");
     }
 
     @When("want to show all attendance percentage in each program")

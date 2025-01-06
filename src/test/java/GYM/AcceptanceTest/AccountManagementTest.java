@@ -11,7 +11,6 @@ import org.junit.jupiter.api.Assertions;
 import java.util.List;
 
 public class AccountManagementTest {
-
     private AccountHelper accountHelper;
     private boolean state;
 
@@ -23,13 +22,11 @@ public class AccountManagementTest {
     @When("the client enters valid personal details")
     public void theClientEntersValidPersonalDetails(DataTable table) {
         List<List<String>> data = table.asLists(String.class);
-
         for (List<String> row : data) {
             if (row.size() == 3) {
                 String name = row.get(0);
                 String age = row.get(1);
                 String goals = row.get(2);
-
                 if (name == null || name.isEmpty() || age == null || age.isEmpty() || goals == null || goals.isEmpty()) {
                     state = false;
                     return;
@@ -62,7 +59,6 @@ public class AccountManagementTest {
     @When("the client updates dietary preferences")
     public void theClientUpdatesDietaryPreferences(DataTable table) {
         List<String> preferencesList = table.asList(String.class);
-
         for (String preference : preferencesList) {
             if (preference == null || preference.isEmpty()) {
                 state = false;
@@ -80,12 +76,10 @@ public class AccountManagementTest {
     @When("the client leaves the age field empty")
     public void theClientLeavesTheAgeFieldEmpty(DataTable table) {
         List<List<String>> goalsList = table.asLists(String.class);
-
         for (List<String> row : goalsList) {
             String name = row.get(0);
             String age = "";
             String goals = row.get(1);
-
             if (name == null || name.isEmpty() || goals == null || goals.isEmpty()) {
                 state = false;
                 return;
@@ -102,12 +96,10 @@ public class AccountManagementTest {
     @When("the client leaves any required field empty")
     public void theClientLeavesAnyRequiredFieldEmpty(DataTable table) {
         List<List<String>> data = table.asLists(String.class);
-
         for (List<String> row : data) {
             String name = row.get(0);
             String age = row.get(1);
             String goals = row.get(2);
-
             if (name == null || name.isEmpty() || age == null || age.isEmpty() || goals == null || goals.isEmpty()) {
                 state = false;
                 return;
@@ -119,5 +111,21 @@ public class AccountManagementTest {
     @Then("displays a message {string}")
     public void displaysAMessage(String message) {
         Assertions.assertTrue(message.contains("Preferences updated successfully"));
+    }
+
+
+
+    @When("the client enters invalid data with name {string}, age {string}, and goals {string}")
+    public void theClientEntersInvalidData(String name, String age, String goals) {
+        if (name == null || name.isEmpty() || age == null || age.isEmpty() || goals == null || goals.isEmpty()) {
+            state = false;
+            return;
+        }
+        state = accountHelper.createProfile(name, age, goals);
+    }
+
+    @Then("the system rejects the profile creation with an error message {string}")
+    public void theSystemRejectsTheProfileCreation(String message) {
+        Assertions.assertFalse(state, message);
     }
 }

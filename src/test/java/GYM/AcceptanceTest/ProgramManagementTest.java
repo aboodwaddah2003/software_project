@@ -43,7 +43,7 @@ public class ProgramManagementTest {
 
         @When("the instructor select CreateNewProgram")
         public void the_instructor_select_create_new_program () {
-        // Write code here that turns the phrase above into concrete actions
+
             P1.CreateNewProgram(P2);
             P1.CreateNewProgram(P3);
             P1.CreateNewProgram(P4);

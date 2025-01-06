@@ -241,17 +241,16 @@ public class Admin  extends User {
         return hasAttendanceData;
     }
 
-    public void printAttendancePercentage(String clientName, int programId) {
+    public boolean printAttendancePercentage(String clientName, int programId) {
 
         Client client = Client.getClientByName(clientName);
         if (client == null) {
             System.out.println("Client not found: " + clientName);
-            return;
+            return false;
         }
-
-
         double attendancePercentage = client.getAttendancePercentage(programId);
         System.out.println("Attendance percentage for client " + clientName + " in program " + programId + ": " + attendancePercentage + "%");
+        return true;
     }
 
 
