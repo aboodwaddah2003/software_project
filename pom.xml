@@ -17,7 +17,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <jacoco.version>0.8.12</jacoco.version> <!-- Added Jacoco version property -->
 
-        <sonar.exclusions>src/main/java/GYM/Milestone.java,src/main/java/GYM/Client.java,src/main/java/GYM/Program.java</sonar.exclusions>
+        <sonar.exclusions>src/main/java/GYM/Milestone.java,src/main/java/GYM/Client.java,src/main/java/GYM/Program.java,src/main/java/GYM/Instructor.java</sonar.exclusions>
 
     </properties>
 
@@ -78,6 +78,7 @@
                         <exclude>GYM/Milestone.class</exclude>
                         <exclude>GYM/Client.class</exclude>
                         <exclude>GYM/Program.class</exclude>
+                        <exclude>GYM/Instructor.class</exclude>
                     </excludes>
                 </configuration>
                 <executions>

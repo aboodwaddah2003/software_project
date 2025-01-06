@@ -11,11 +11,5 @@ public class Message {
         this.content = content;
     }
 
-    public String getSenderName() {
-        return senderName;
-    }
 
-    public String getContent() {
-        return content;
-    }
 }
