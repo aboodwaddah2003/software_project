@@ -17,7 +17,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <jacoco.version>0.8.12</jacoco.version> <!-- Added Jacoco version property -->
 
-        <sonar.exclusions>GYM/Milestone.java</sonar.exclusions>
+        <sonar.exclusions>src/main/java/GYM/Milestone.java</sonar.exclusions>
 
     </properties>
 
@@ -93,7 +93,6 @@
                     </execution>
                 </executions>
             </plugin>
-
 
 
             <!-- Compiler Plugin -->
