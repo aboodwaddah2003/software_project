@@ -19,7 +19,6 @@ public class loginTest {
         Userlist.fillData();
         login = new loginHelper();
 
-
     }
 
     @When("the user enters a valid username {string} and a valid password {string}")
@@ -48,15 +47,7 @@ public class loginTest {
         System.out.println(login.getMessage());
     }
 
-/////////////////////////s2
 
-  /*  @Given("when the user in the login page")
-    public void when_the_user_in_the_login_page() {
-
-        Userlist.fillData();
-        login=new loginHelper();
-    }
-    */
 
     @When("the user enters  invalid username {string}")
     public void the_user_enters_invalid_username(String string) {
@@ -97,7 +88,23 @@ public class loginTest {
 
     @When("the user leaves the username field empty and enters a password \"password1\"or empty pass with valid username\"osama\"")
     public void the_user_leaves_the_username_field_empty_and_enters_a_password_password1_or_empty_pass_with_valid_username_osama() {
-state=login.allFieldsAreFilled("abood","");
+
+        state=login.allFieldsAreFilled("abood","");
+
+        boolean state1 = login.allFieldsAreFilled("", "password1");
+        assert state1 == false : "Expected false when username is empty";
+
+
+        boolean state2 = login.allFieldsAreFilled("osama", "");
+        assert state2 == false : "Expected false when password is empty";
+
+
+        boolean state3 = login.allFieldsAreFilled("123", "123");
+        assert state3 == true : "Expected true when both fields are filled";
+
+
+        boolean state4 = login.allFieldsAreFilled(" ", " ");
+        assert state4 == false : "Expected false when both fields contain spaces only";
     }
     @When("clicks the login button4")
     public void clicks_the_login_button4() {
@@ -107,6 +114,7 @@ state=login.allFieldsAreFilled("abood","");
         else {
             Assertions.assertFalse(state);
         }
+
     }
     @Then("the login attempt fails with an error message for missing username")
     public void the_login_attempt_fails_with_an_error_message_for_missing_username() {

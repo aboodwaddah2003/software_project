@@ -35,18 +35,10 @@ public class ProgressTrackingTest {
             String bmi = row.get(1);
             String attendance = row.get(2);
 
-
-            if (weight != null && !weight.trim().isEmpty() && bmi != null && !bmi.trim().isEmpty() && attendance != null && !attendance.trim().isEmpty()) {
-                weight = weight.trim();
-                bmi = bmi.trim();
-                attendance = attendance.trim();
-
                 state = userProgress.logMilestone(weight, bmi, attendance);
-            } else {
-                System.out.println("Skipping invalid milestone entry due to null or empty data.");
             }
         }
-    }
+
 
 
     @Then("the system saves all milestones successfully")

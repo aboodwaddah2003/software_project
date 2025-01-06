@@ -7,10 +7,10 @@ public class Client extends User {
     private int age;
     private String fitnessGoals;
     private String dietaryPreferences;
-    private List<Program> enrolledPrograms;
+    static  List<Program> enrolledPrograms;
 
-    public static ArrayList<Milestone> milestones= new ArrayList<>();
-
+    public static List<Milestone> milestones;
+    private FeedbackSubmissionService feedbackService;
     public Client(String userName) {
         super(userName, "default_email@example.com", "default_password", "Client", "Basic");
         this.enrolledPrograms = new ArrayList<>();
@@ -20,8 +20,12 @@ public class Client extends User {
     public Client(String userName, String email, String password, String type, String subscriptionPlan) {
         super(userName, email, password, type, subscriptionPlan);
         this.enrolledPrograms = new ArrayList<>();
+        this.feedbackService = new FeedbackService();
+        this.milestones=new ArrayList<>();
     }
-
+    public List<Milestone> getMilestones() {
+        return milestones;
+    }
 
     public int getAge() {
         return age;
@@ -67,26 +71,7 @@ public class Client extends User {
     }
 
 
-    public void viewSchedule(Program program) {
-        if (isEnrolledInProgram(program)) {
-            System.out.println("Displaying schedule for: " + program.getName());
-            System.out.println("Schedule: Monday 10AM, Wednesday 10AM, Friday 10AM"); // Example schedule
-        } else {
-            System.out.println("Client is not enrolled in this program.");
-        }
-    }
 
-
-    public void displayEnrolledPrograms() {
-        if (enrolledPrograms.isEmpty()) {
-            System.out.println("Client is not enrolled in any programs.");
-        } else {
-            System.out.println("Enrolled programs:");
-            for (Program program : enrolledPrograms) {
-                System.out.println("- " + program.getName());
-            }
-        }
-    }
 
     public void addContent(String Title,String Author,String Status,String SubmissionDate,String content )
     {
@@ -106,54 +91,53 @@ public class Client extends User {
         return  false;
     }
 
-    public boolean submitComplaint(String details)
-    {
-        if(!details.isEmpty() && details!=null) {
-            FeedbackService.submitComplaint(this,details);
-            return  true;
+    public boolean submitComplaint(String details) {
+        if (details != null && !details.isEmpty()) {
+            FeedbackSubmissionService.submitComplaint(this, details);
+            return true;
         }
         return false;
     }
 
-
-    public static void addMilestone( String weight, String bmi, String attendance,String clientName){
-        Milestone milestone = new Milestone(weight, bmi, attendance,clientName);
-        milestones.add(milestone);
-        System.out.println("Milestone added: " + milestone);
-
-
-    }
-
-    public static void displayMilestones() {
-        if (milestones.isEmpty()) {
-            System.out.println("No milestones available.");
+    public static Client getClientByName(String name) {
+        int i = Userlist.search(name);
+        if (i == -1) {
+            return null;
         } else {
-            System.out.println("All Milestones:");
-            for (Milestone milestone : milestones) {
-                System.out.println(milestone);
+            return (Client) Userlist.users.get(i);
+        }
+    }
+    public void addMilestone(Milestone milestone) {
+        milestones.add(milestone);
+    }
+
+    public double getAttendancePercentage(int programId) {
+        int attendedCount = 0;
+        int totalMilestones = 0;
+
+        for (Milestone milestone : milestones) {
+            if (milestone.getProgramId() == programId) {
+                totalMilestones++;
+                if (milestone.getAttendance().equalsIgnoreCase("Present")) {
+                    attendedCount++;
+                }
+            }
+        }
+        if (totalMilestones == 0) {
+            return 0.0;
+        }
+
+        return (double) attendedCount / totalMilestones * 100;
+    }
+    public void displayEnrolledPrograms() {
+        if (enrolledPrograms.isEmpty()) {
+            System.out.println("Client is not enrolled in any programs.");
+        } else {
+            System.out.println("Enrolled programs:");
+            for (Program program : enrolledPrograms) {
+                System.out.println("- " + program.getName());
             }
         }
     }
-
-    public static boolean searchClient(String name) {
-        for (Milestone milestone : milestones) {
-            if (name==milestone.getClientName())
-                return true;
-        }
-        return false;
-    }
-
-    public static void printMilestoneByName(String name){
-        for (Milestone milestone : milestones) {
-            if (name==milestone.getClientName()){
-                System.out.println(milestone.toString());
-                return;
-            }
-
-        }
-
-
-    }
-
 
 }

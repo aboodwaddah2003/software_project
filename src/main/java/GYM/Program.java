@@ -1,6 +1,8 @@
 package GYM;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Program {
     private String name;
@@ -15,16 +17,18 @@ public class Program {
 
     private LocalDate startDate;
     private  double price;
-    private  int count ;
+    private static int count=0 ;
 
+    private List<Milestone> programMilestones;
     public Program(String name, String difficultyLevel, String focusArea,double price,int duration) {
         this.name = name;
         this.difficultyLevel = difficultyLevel;
         this.focusArea = focusArea;
-        count=0;
        this.price=price;
        this.duration=duration;
        this.startDate=LocalDate.now();
+       this.programMilestones= new ArrayList<>();
+       this.id=++count;
     }
 
     public Program(String name, String difficultyLevel, double price,
@@ -40,16 +44,7 @@ public class Program {
     }
 
 
-    //default constructor
-    public Program() {
-        this.name = "";
-        this.difficultyLevel = "";
-        this.price=0;
-        this.duration=0;
-        this.goals="";
-        this.Scheduels ="";
-        this.imgPath="";
-    }
+
 
 
 
@@ -69,10 +64,15 @@ public class Program {
 
     @Override
     public boolean equals(Object obj) {
-        if (this == obj) return true;
-        if (obj == null || getClass() != obj.getClass()) return false;
+        if (this == obj) return true; // Check for reference equality
+        if (obj == null || getClass() != obj.getClass()) return false; // Check for null and class type
         Program program = (Program) obj;
-        return name.equals(program.name);
+        return name.equals(program.name); // Compare the 'name' field for equality
+    }
+
+    @Override
+    public int hashCode() {
+        return name.hashCode(); // Generate a hash code based on the 'name' field
     }
 
 
@@ -88,7 +88,7 @@ public class Program {
     }
     public  void  increaseSubProgramCount()
     {
-        this.count++;
+        count++;
     }
     public int numOfClientSub()
     {
@@ -160,5 +160,25 @@ public class Program {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public void addMilestone(Milestone milestone) {
+        programMilestones.add(milestone);
+    }
+
+    public double calculateAttendancePercentage() {
+        int totalMilestones = programMilestones.size();
+        int attendedCount = 0;
+
+        for (Milestone milestone : programMilestones) {
+            if (milestone.getAttendance().equalsIgnoreCase("present")) {
+                attendedCount++;
+            }
+        }
+
+        if (totalMilestones == 0) {
+            return 0.0;
+        }
+        return (double) attendedCount / totalMilestones * 100;
     }
 }

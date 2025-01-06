@@ -1,5 +1,6 @@
 package GYM.AcceptanceTest;
 import GYM.Admin;
+import GYM.Client;
 import GYM.ProgramService;
 import GYM.Userlist;
 import io.cucumber.java.en.And;
@@ -22,6 +23,8 @@ public Admin A1;
    p=new ProgramService();
    u.fillDataClientEnrollInProgram();
    A1=new Admin("abood","abood@gmail.com","ab12345678","Admin","Owner");
+        Client n1 = new Client("sead", "moh@gmail.com", "10203040", "Client", "Gold");
+      ProgramService.fillData4();
     }
     @When("the admin navigates to the Program Statistics section")
     public void the_admin_navigates_to_the_program_statistics_section() {
@@ -53,6 +56,32 @@ else
     @Then("the system calculates the total revenue and display it")
     public void the_system_calculates_the_total_revenue_and_display_it() {
 A1.generateRevenueReport();
+    }
+
+
+    @When("the admin navigates to the Reports section then enter the name of client")
+    public void the_admin_navigates_to_the_reports_section_then_enter_the_name_of_client() {
+
+    }
+    @When("selects attendance Reports")
+    public void selects_attendance_reports() {
+        A1.printAttendancePercentage("sead",1);
+    }
+    @Then("the system view the attendance Reports")
+    public void the_system_view_the_attendance_reports() {
+
+    }
+
+    @When("want to show all attendance percentage in each program")
+    public void want_to_show_all_attendance_percentage_in_each_program() {
+      state=A1.printAttendancePercentageForPrograms();
+    }
+    @Then("the system view the attendance Reports that include the attendance percentage")
+    public void the_system_view_the_attendance_reports_that_include_the_attendance_percentage() {
+if(state)
+    Assertions.assertTrue(true);
+else
+    Assertions.fail("dvdv");
     }
 
 }

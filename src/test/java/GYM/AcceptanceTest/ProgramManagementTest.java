@@ -13,10 +13,22 @@ public class ProgramManagementTest {
 
      Instructor I1;
     ProgramManagementPage P1=new ProgramManagementPage();
-     Program P2 = new Program("Yoga", "easy", 10, 8,
+     Program P2 = new Program("Yoga", "easy", 10, 0,
              "goals","online", "yoga.jpg");
+    Program P3 = new Program("Yoga", "easy", -1, 8,
+            "goals","online", "yoga.jpg");
 
+    Program P4 = new Program("Yoga", "easy", 0, 8,
+            "goals","", "yoga.jpg");
 
+    Program P5 = new Program("Yoga", "easy", 10, -5,
+            "goals","", "yoga.jpg");
+
+    Program P6 = new Program("Yoga", "easy", 10, 5,
+            "goals","", "yoga.jpg");
+
+    Program P7 = new Program("Yoga", "", 10, -5,
+            "","online", "yoga.jpg");
     public boolean Created,Updated,Delete;
     private LocalDate localDate=LocalDate.of(2025, 1, 1);
 
@@ -32,7 +44,13 @@ public class ProgramManagementTest {
         @When("the instructor select CreateNewProgram")
         public void the_instructor_select_create_new_program () {
         // Write code here that turns the phrase above into concrete actions
-        P1.CreateNewProgram(P2);
+            P1.CreateNewProgram(P2);
+            P1.CreateNewProgram(P3);
+            P1.CreateNewProgram(P4);
+            P1.CreateNewProgram(P5);
+            P1.CreateNewProgram(P6);
+            P1.CreateNewProgram(P7);
+
         Created = true;
     }
 
@@ -60,7 +78,6 @@ public class ProgramManagementTest {
         public void the_instructor_try_to_save_the_program_without_providing_inputs () {
         P2 = new Program("", "easy", 10, 8,
                 "goals", "", "yoga.jpg");
-
         Created = false;
 
     }
@@ -138,7 +155,7 @@ public class ProgramManagementTest {
     //////////////////////////////////////////////////////////////////////////////////
     @Given("the instructor tries to delete a program assigned to active gym members")
     public void the_instructor_tries_to_delete_a_program_assigned_to_active_gym_members() {
-        P1.ActiveProgram(P2);
+
     }
 
     @When("the instructor click the {string} button6")

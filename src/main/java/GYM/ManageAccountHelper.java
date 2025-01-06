@@ -8,14 +8,15 @@ import static GYM.Userlist.ActivityRecords;
 public class ManageAccountHelper {
 
     public static ArrayList<Instructor> instructors=new ArrayList<Instructor>();
-
+    private static final String INSTRUCTOR_ROLE = "Instructor"; // Constant for the role
+    private static final String USER_ROLE = "alaa22"; // Constant for the role
     private static boolean isActivityFilled = false;
     public static void fillData2() {
-        Instructor n1 = new Instructor("alaa22", "alaa22@gmail.com", "1234", "Instructor", "Silver");
-        Instructor n2 = new Instructor("mohammedK", "mohammed.k@gmail.com", "5678", "Instructor", "Gold");
-        Instructor n3 = new Instructor("mahmoud","moh@gmail.com","10203040","Instructor","Gold");
-        Instructor n4 = new Instructor("ahmed87", "ahmed.87@hotmail.com", "121314", "Instructor", "Basic");
-        Instructor n5 = new Instructor("layla99", "layla.99@gmail.com", "151617", "Instructor", "Premium");
+        Instructor n1 = new Instructor("alaa22", "alaa22@gmail.com", "1234", INSTRUCTOR_ROLE, "Silver");
+        Instructor n2 = new Instructor("mohammedK", "mohammed.k@gmail.com", "5678", INSTRUCTOR_ROLE, "Gold");
+        Instructor n3 = new Instructor("mahmoud", "moh@gmail.com", "10203040", INSTRUCTOR_ROLE, "Gold");
+        Instructor n4 = new Instructor("ahmed87", "ahmed.87@hotmail.com", "121314", INSTRUCTOR_ROLE, "Basic");
+        Instructor n5 = new Instructor("layla99", "layla.99@gmail.com", "151617", INSTRUCTOR_ROLE, "Premium");
 
 
         if (search(n1.getUserName()) == -1) {
@@ -60,10 +61,10 @@ public class ManageAccountHelper {
 public  static  void fillRecordActivity()
 {
     if (!isActivityFilled) {
-        Userlist.recordActivity("alaa22", "update profile","15-09-2024");
-        Userlist.recordActivity("alaa22", "add publication","12-09-2024");
-        Userlist.recordActivity("alaa22", " delete publication","14-09-2013");
-        Userlist.recordActivity("waddah", "update profile","14-09-2013");
+        Userlist.recordActivity(USER_ROLE, "update profile","15-09-2024");
+        Userlist.recordActivity(USER_ROLE, "add publication","12-09-2024");
+        Userlist.recordActivity(USER_ROLE, " delete publication","14-09-2013");
+        Userlist.recordActivity(USER_ROLE, "update profile","14-09-2013");
 
 
         isActivityFilled = true;

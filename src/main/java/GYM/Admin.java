@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 
+import static GYM.Client.enrolledPrograms;
 import static GYM.Userlist.ActivityRecords;
 
 public class Admin  extends User {
@@ -70,27 +71,48 @@ public class Admin  extends User {
 
     public boolean updateData(String name, String email, String pass, String type, String subPlan) {
         int i = Userlist.search(name);
-        if (i == -1)
+        if (i == -1) {
             return false;
-        else {
-            User user = Userlist.users.get(i);
-            if (email != null && !email.isEmpty() && Userlist.IsValidEmail(email)) {
-                if (Userlist.searchEmail(email) != -1)
-                    return false;
-                user.setEmail(email);
-            }
-            if (subPlan != null && !subPlan.isEmpty()) {
-                user.setSubscriptionPlans(subPlan);
-            }
-
-            if (type != null && !type.isEmpty() && Userlist.IsValidRole(type)) {
-                user.setType(type);
-            }
-            if (pass != null && !pass.isEmpty() && Userlist.IsValidPass(pass)) {
-                user.setPassword(pass);
-            }
-            return true;
         }
+
+        User user = Userlist.users.get(i);
+
+        if (isEmailUpdatable(email)) {
+            if (Userlist.searchEmail(email) != -1) {
+                return false;
+            }
+            user.setEmail(email);
+        }
+
+        if (isNonEmpty(subPlan)) {
+            user.setSubscriptionPlans(subPlan);
+        }
+
+        if (isValidType(type)) {
+            user.setType(type);
+        }
+
+        if (isValidPassword(pass)) {
+            user.setPassword(pass);
+        }
+
+        return true;
+    }
+
+    private boolean isEmailUpdatable(String email) {
+        return email != null && !email.isEmpty() && Userlist.IsValidEmail(email);
+    }
+
+    private boolean isNonEmpty(String input) {
+        return input != null && !input.isEmpty();
+    }
+
+    private boolean isValidType(String type) {
+        return isNonEmpty(type) && Userlist.IsValidRole(type);
+    }
+
+    private boolean isValidPassword(String pass) {
+        return isNonEmpty(pass) && Userlist.IsValidPass(pass);
     }
 
     public  static boolean  setAccountStatus(String userName, boolean activate) {
@@ -202,6 +224,36 @@ public class Admin  extends User {
 
     }
 
+    public boolean printAttendancePercentageForPrograms() {
+        if (enrolledPrograms.isEmpty()) {
+            System.out.println("No programs enrolled.");
+            return false;
+        }
+
+        boolean hasAttendanceData = false;
+
+        for (Program program : enrolledPrograms) {
+            double attendancePercentage = program.calculateAttendancePercentage();
+            System.out.println("Attendance Percentage for " + program.getName() + ": " + attendancePercentage + "%");
+            hasAttendanceData = true;
+        }
+
+        return hasAttendanceData;
+    }
+
+    public void printAttendancePercentage(String clientName, int programId) {
+
+        Client client = Client.getClientByName(clientName);
+        if (client == null) {
+            System.out.println("Client not found: " + clientName);
+            return;
+        }
+
+
+        double attendancePercentage = client.getAttendancePercentage(programId);
+        System.out.println("Attendance percentage for client " + clientName + " in program " + programId + ": " + attendancePercentage + "%");
+    }
+
 
     public boolean  countActivePrograms(LocalDate d)
     {
@@ -222,7 +274,7 @@ public class Admin  extends User {
         int count=0;
         for (Program program : ProgramService.allPrograms) {
             if (!program.isCompleted(d))
-                System.out.println(" id program 🙁"+program.getId() +")"+program.getName() + "is active program The start date for program is  " + program.getStartDate() + " the duration for program is " + program.getDuration());
+                System.out.println(" id program "+program.getId() +")"+program.getName() + "is active program The start date for program is  " + program.getStartDate() + " the duration for program is " + program.getDuration());
         }
     }
 
@@ -260,6 +312,9 @@ public class Admin  extends User {
         }
         return false;
     }
+
+
+
 
 
 }
