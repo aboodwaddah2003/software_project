@@ -278,7 +278,15 @@ public class Admin  extends User {
     }
 
 
-
+    public static boolean resolveComplaint(int id)
+    {
+        if(id>0)
+        {
+            FeedbackService.resolveComplaint(id);
+            return true;
+        }
+        return false;
+    }
 
 
 
