@@ -14,9 +14,20 @@ package GYM;
 //import static GYM.ProgramService.*;
 //import static GYM.Userlist.*;
 
+import java.time.LocalDate;
+import java.util.*;
+
+import static GYM.Admin.*;
+import static GYM.ContentMangerService.*;
+import static GYM.FeedbackService.*;
+import static GYM.ManageAccountHelper.instructors;
+import static GYM.ProgramService.allPrograms;
+import static GYM.ProgramService.getProgramSchedule;
+import static GYM.Userlist.*;
+
 public class Main {
-//
-//
+
+
 //    public static void main(String[] args) {
 //
 //        Scanner scanner = new Scanner(System.in);
@@ -64,14 +75,14 @@ public class Main {
 //        System.out.print("Enter your password: ");
 //        String password = scanner.nextLine();
 //
-//        int userIndex = Userlist.search(username);
+//        int userIndex = search(username);
 //
-//        if (userIndex == -1 || !Userlist.users.get(userIndex).getPassword().equals(password)) {
+//        if (userIndex == -1 || !users.get(userIndex).getPassword().equals(password)) {
 //            System.out.println("Invalid username or password. Returning to the main menu...");
 //            return;
 //        }
 //
-//        User currentUser = Userlist.users.get(userIndex);
+//        User currentUser = users.get(userIndex);
 //        boolean isAdmin = currentUser.getType().equalsIgnoreCase("Admin");
 //        boolean isClient = currentUser.getType().equalsIgnoreCase("Client");
 //
@@ -370,7 +381,7 @@ public class Main {
 //
 //            switch (adminChoice) {
 //                case 1:
-//                    for (User user : Userlist.users) {
+//                    for (User user : users) {
 //                        System.out.println(user);
 //                    }
 //                    break;
@@ -413,7 +424,7 @@ public class Main {
 //
 //        if (Userlist.IsCanBeUser(newUsername, newPassword, newEmail, newSubPlan)) {
 //            User newClient = new User(newUsername, newPassword, newEmail, "Client", newSubPlan);
-//            Userlist.users.add(newClient);
+//            users.add(newClient);
 //            System.out.println("New client created successfully!");
 //        } else {
 //            System.out.println("Failed to create new client. Please check the details.");
@@ -445,10 +456,10 @@ public class Main {
 //    private static void deactivateClientAccount(Scanner scanner) {
 //        System.out.print("Enter the username of the client to deactivate: ");
 //        String deactivateUsername = scanner.nextLine();
-//        int deactivateIndex = Userlist.search(deactivateUsername);
+//        int deactivateIndex = search(deactivateUsername);
 //
 //        if (deactivateIndex != -1) {
-//            Userlist.users.remove(deactivateIndex);
+//            users.remove(deactivateIndex);
 //            System.out.println("Client account deactivated successfully!");
 //        } else {
 //            System.out.println("Client not found.");
@@ -515,7 +526,7 @@ public class Main {
 //        }
 //
 //        User newUser = new User(username, email, password, role, subPlan);
-//        Userlist.users.add(newUser);
+//        users.add(newUser);
 //        System.out.println("Sign-Up successful! Welcome, " + username + ". You can now log in.");
 //    }
 //
@@ -992,8 +1003,8 @@ public class Main {
 //        System.out.println("Error: The user is not a client.");
 //        return false;
 //    }
-
-
+//
+//
 //    public  static void showAllInstructorRequest() {
 //        for (Instructor user : instructors) {
 //            {
